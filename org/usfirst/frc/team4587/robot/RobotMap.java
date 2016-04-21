@@ -49,11 +49,12 @@ public class RobotMap {
     public static final int DEFENSE_SWITCH_2 = 6;
     public static final int DEFENSE_SWITCH_3 = 7;
     
-    public static final int MOAT = 1;
-    public static final int PORTCULLIS = 2;
-    public static final int ROUGH_TERRAIN = 3;
+    public static final int LOW_BAR = 0;
+    public static final int ROUGH_TERRAIN = 1;
+    public static final int ROCK_WALL = 2;
+    public static final int MOAT = 3;
     public static final int CHEVAL = 4;
-    public static final int ROCK_WALL = 5;
+    public static final int PORTCULLIS = 5;
     public static final int RAMPARTS = 6;
     
     
