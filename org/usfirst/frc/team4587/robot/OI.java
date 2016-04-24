@@ -11,6 +11,8 @@ import utility.ValueLogger;
 import org.usfirst.frc.team4587.robot.commands.Aim;
 import org.usfirst.frc.team4587.robot.commands.AutomaticAim;
 import org.usfirst.frc.team4587.robot.commands.DriveWithJoysticks;
+import org.usfirst.frc.team4587.robot.commands.GrappleArm;
+import org.usfirst.frc.team4587.robot.commands.GrappleFire;
 import org.usfirst.frc.team4587.robot.commands.HighShot;
 import org.usfirst.frc.team4587.robot.commands.LowShot;
 import org.usfirst.frc.team4587.robot.commands.LowerAndHoldArm;
@@ -22,6 +24,7 @@ import org.usfirst.frc.team4587.robot.commands.StopIntakeMotors;
 import org.usfirst.frc.team4587.robot.commands.ToggleArmPiston;
 import org.usfirst.frc.team4587.robot.commands.ToggleFlashlight;
 import org.usfirst.frc.team4587.robot.commands.ToggleIntakePiston;
+import org.usfirst.frc.team4587.robot.commands.WinchEngage;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -65,7 +68,7 @@ public class OI implements LogDataSource {
     		buttonX1.whenPressed(new Aim(0.6, 1));
 	    	buttonY1.whenPressed(new ToggleFlashlight());
 	    	leftBumper1.whenPressed(new ToggleArmPiston());
-	    	leftTrigger1.whileHeld(new LowerAndHoldArm());
+	    	leftTrigger1.whileHeld(new WinchEngage());
 	    	rightBumper1.whenPressed(new LowShot());
     		rightTrigger1.whenPressed(new HighShot());
     	}
@@ -86,7 +89,9 @@ public class OI implements LogDataSource {
 	    	buttonX2.whenPressed(new StartIntakeMotors(Parameters.getDouble("Intake Motor Eject Speed", -1.0)));
 	    	buttonY2.whenPressed(new StartIntakeMotors(Parameters.getDouble("Intake Motor Input Speed", 1.0)));
 	    	rightBumper2.whenPressed(new ToggleIntakePiston());
-	    	leftBumper2.whenPressed(new PulseLowGoalSolenoid(1000));
+	    	//leftBumper2.whenPressed(new PulseLowGoalSolenoid(1000));
+	    	leftTrigger2.whenPressed(new GrappleArm());
+	    	rightTrigger2.whenPressed(new GrappleFire());
     	}
     }
     

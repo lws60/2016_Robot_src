@@ -27,7 +27,10 @@ public class RobotMap {
 	public static final int SOLENOID_CATAPULT_1 = 4;
 	public static final int SOLENOID_CATAPULT_2 = 5;
 	public static final int SOLENOID_CATAPULT_3 = 6;
+	public static final int SOLENOID_GRAPPLE_ARM = 7;
+	public static final int SOLENOID_GRAPPLE_FIRE = 0;
     
+	public static final int SOLENOID_WINCH_ENGAGE = 2;
 	/*			DIO Sensors			*/
 	public static final int SWITCH_SHOOTER_EXIT = 0;	// D E L E T E   M E
     public static final int SWITCH_INTAKE_LIMIT = 1;

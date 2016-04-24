@@ -18,6 +18,7 @@ import org.usfirst.frc.team4587.robot.commands.AutonomousDriveUnderPortcullis;
 import org.usfirst.frc.team4587.robot.commands.AutonomousPosition2;
 import org.usfirst.frc.team4587.robot.commands.AutonomousPosition34;
 import org.usfirst.frc.team4587.robot.commands.AutonomousPosition5;
+import org.usfirst.frc.team4587.robot.commands.AutonomousTest;
 import org.usfirst.frc.team4587.robot.commands.CrossDefenseAndShoot;
 import org.usfirst.frc.team4587.robot.commands.LowbarAndShoot;
 import org.usfirst.frc.team4587.robot.commands.Wait;
@@ -25,6 +26,7 @@ import org.usfirst.frc.team4587.robot.subsystems.ArmPiston;
 import org.usfirst.frc.team4587.robot.subsystems.Catapult;
 import org.usfirst.frc.team4587.robot.subsystems.DriveBase;
 import org.usfirst.frc.team4587.robot.subsystems.Flashlight;
+import org.usfirst.frc.team4587.robot.subsystems.GrappleHook;
 import org.usfirst.frc.team4587.robot.subsystems.Intake;
 import org.usfirst.frc.team4587.robot.subsystems.IntakePiston;
 import org.usfirst.frc.team4587.robot.subsystems.LowGoalSolenoid;
@@ -99,6 +101,12 @@ public class Robot extends IterativeRobot implements LogDataSource {
 	{
 		return m_catapult;
 	}
+	
+	private static GrappleHook m_grappleHook;
+	public static GrappleHook getGrappleHook()
+	{
+		return m_grappleHook;
+	}
 
 	private static Flashlight m_flashlight;
 	public static Flashlight getFlashlight()
@@ -140,9 +148,9 @@ public class Robot extends IterativeRobot implements LogDataSource {
         Bling.initialize();
     	Parameters.readValues();
         m_iHaveACamera  = Parameters.getBoolean("Camera is Installed",false);
-        m_iAmARealRobot = Parameters.getBoolean("RoboRIO is Mounted in a Robot",false);
+        m_iAmARealRobot = Parameters.getBoolean("RoboRIO is Mounted in a Robot",true);
 
-        m_defenseSwitchZero = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_0));
+        /*m_defenseSwitchZero = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_0));
 		m_defenseSwitchOne = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_1));
 		m_defenseSwitchTwo = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_2));
 		m_defenseSwitchThree = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_3));
@@ -151,15 +159,16 @@ public class Robot extends IterativeRobot implements LogDataSource {
 		m_positionSwitchOne = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_1));
 		m_positionSwitchTwo = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_2));
 		m_positionSwitchThree = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_3));
-		
+		*/
     	if ( m_iAmARealRobot ) {
 			m_armPiston = new ArmPiston();
 			m_catapult = new Catapult();
+			m_grappleHook = new GrappleHook();
 			m_driveBase = new DriveBase();
 			m_flashlight = new Flashlight();
 	    	m_intake = new Intake();
 			m_intakePiston = new IntakePiston();
-			m_lowGoalSolenoid = new LowGoalSolenoid();
+			//m_lowGoalSolenoid = new LowGoalSolenoid();
 			
 			m_defenseSwitchZero = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_0));
 			m_defenseSwitchOne = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_1));
@@ -187,11 +196,12 @@ public class Robot extends IterativeRobot implements LogDataSource {
             logger.registerDataSource ( this );
             logger.registerDataSource ( m_armPiston );
             logger.registerDataSource ( m_catapult );
+            logger.registerDataSource ( m_grappleHook );
             logger.registerDataSource ( m_driveBase );
             logger.registerDataSource ( m_flashlight );
             logger.registerDataSource ( m_intake );
             logger.registerDataSource ( m_intakePiston );
-            logger.registerDataSource ( m_lowGoalSolenoid );
+            //logger.registerDataSource ( m_lowGoalSolenoid );
             logger.registerDataSource ( m_oi );
         }
         
@@ -233,7 +243,7 @@ public class Robot extends IterativeRobot implements LogDataSource {
     		m_driveBase.getLeftController().setMaxLowerPerInterval(1.0);
     		m_driveBase.getRightController().setMaxLowerPerInterval(1.0);
     		
-    		int position = getFieldPosition();
+    		/*int position = getFieldPosition();
     		int defense = getFieldDefense();
     		if (position == 1)
     		{
@@ -261,8 +271,8 @@ public class Robot extends IterativeRobot implements LogDataSource {
     				//System.out.println("position 5 defense: " + defense);
     				break;
     			}
-    		}
-    		autonomousCommand = new AutonomousPosition2(getFieldDefense());
+    		}*/
+    		autonomousCommand = new AutonomousTest();
     		System.out.println(autonomousCommand);
             //autonomousCommand.start();
             
