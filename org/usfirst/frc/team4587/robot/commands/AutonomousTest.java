@@ -9,8 +9,9 @@ public class AutonomousTest extends CommandGroup {
     
     public  AutonomousTest() {
     	// rough terrain addSequential(new AutonomousDriveStraightDistance(135, 0.6));
-    	addSequential(new AutonomousDriveStraightDistance(210, 0.9));
-        // Add Commands here:
+    	// rock wall addSequential(new AutonomousDriveStraightDistance(210, 0.9));
+        addSequential(new AutonomousDriveStraightDistance(40, 0.6));
+    	// Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.

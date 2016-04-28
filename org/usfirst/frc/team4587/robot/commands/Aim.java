@@ -18,6 +18,9 @@ public class Aim extends Command {
 	private double m_desiredYaw;
 	private double m_tolerance;
 	private double m_speed;
+	
+	private int count;
+	
     public Aim(double speed, double tolerance) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -33,6 +36,8 @@ public class Aim extends Command {
     	m_onTarget = false;
     	m_moving = false;
     	m_desiredYaw = Gyro.getYaw();
+    	
+    	count = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run

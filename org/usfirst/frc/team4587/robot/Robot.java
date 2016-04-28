@@ -147,7 +147,7 @@ public class Robot extends IterativeRobot implements LogDataSource {
     	m_robot = this;
         Bling.initialize();
     	Parameters.readValues();
-        m_iHaveACamera  = Parameters.getBoolean("Camera is Installed",false);
+        m_iHaveACamera  = Parameters.getBoolean("Camera is Installed",true);
         m_iAmARealRobot = Parameters.getBoolean("RoboRIO is Mounted in a Robot",true);
 
         /*m_defenseSwitchZero = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_0));
@@ -163,12 +163,12 @@ public class Robot extends IterativeRobot implements LogDataSource {
     	if ( m_iAmARealRobot ) {
 			m_armPiston = new ArmPiston();
 			m_catapult = new Catapult();
-			m_grappleHook = new GrappleHook();
+			//m_grappleHook = new GrappleHook();
 			m_driveBase = new DriveBase();
 			m_flashlight = new Flashlight();
 	    	m_intake = new Intake();
 			m_intakePiston = new IntakePiston();
-			//m_lowGoalSolenoid = new LowGoalSolenoid();
+			m_lowGoalSolenoid = new LowGoalSolenoid();
 			
 			m_defenseSwitchZero = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_0));
 			m_defenseSwitchOne = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_1));
@@ -196,12 +196,12 @@ public class Robot extends IterativeRobot implements LogDataSource {
             logger.registerDataSource ( this );
             logger.registerDataSource ( m_armPiston );
             logger.registerDataSource ( m_catapult );
-            logger.registerDataSource ( m_grappleHook );
+            //logger.registerDataSource ( m_grappleHook );
             logger.registerDataSource ( m_driveBase );
             logger.registerDataSource ( m_flashlight );
             logger.registerDataSource ( m_intake );
             logger.registerDataSource ( m_intakePiston );
-            //logger.registerDataSource ( m_lowGoalSolenoid );
+            logger.registerDataSource ( m_lowGoalSolenoid );
             logger.registerDataSource ( m_oi );
         }
         
@@ -243,9 +243,9 @@ public class Robot extends IterativeRobot implements LogDataSource {
     		m_driveBase.getLeftController().setMaxLowerPerInterval(1.0);
     		m_driveBase.getRightController().setMaxLowerPerInterval(1.0);
     		
-    		/*int position = getFieldPosition();
+    		int position = getFieldPosition();
     		int defense = getFieldDefense();
-    		if (position == 1)
+    		/*if (position == 1)
     		{
     			autonomousCommand = new LowbarAndShoot();
     		}
@@ -272,7 +272,7 @@ public class Robot extends IterativeRobot implements LogDataSource {
     				break;
     			}
     		}*/
-    		autonomousCommand = new AutonomousTest();
+    		autonomousCommand = new LowbarAndShoot();
     		System.out.println(autonomousCommand);
             //autonomousCommand.start();
             

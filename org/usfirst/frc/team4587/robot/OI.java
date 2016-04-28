@@ -68,7 +68,7 @@ public class OI implements LogDataSource {
     		buttonX1.whenPressed(new Aim(0.6, 1));
 	    	buttonY1.whenPressed(new ToggleFlashlight());
 	    	leftBumper1.whenPressed(new ToggleArmPiston());
-	    	leftTrigger1.whileHeld(new WinchEngage());
+	    	//leftTrigger1.whileHeld(new WinchEngage());
 	    	rightBumper1.whenPressed(new LowShot());
     		rightTrigger1.whenPressed(new HighShot());
     	}
@@ -89,9 +89,9 @@ public class OI implements LogDataSource {
 	    	buttonX2.whenPressed(new StartIntakeMotors(Parameters.getDouble("Intake Motor Eject Speed", -1.0)));
 	    	buttonY2.whenPressed(new StartIntakeMotors(Parameters.getDouble("Intake Motor Input Speed", 1.0)));
 	    	rightBumper2.whenPressed(new ToggleIntakePiston());
-	    	//leftBumper2.whenPressed(new PulseLowGoalSolenoid(1000));
-	    	leftTrigger2.whenPressed(new GrappleArm());
-	    	rightTrigger2.whenPressed(new GrappleFire());
+	    	leftBumper2.whenPressed(new PulseLowGoalSolenoid(1000));
+	    	//leftTrigger2.whenPressed(new GrappleArm());
+	    	//rightTrigger2.whenPressed(new GrappleFire());
     	}
     }
     
