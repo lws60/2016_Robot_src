@@ -36,7 +36,14 @@ public class AutonomousDriveStraightDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.getDriveBase().straightDistanceTraveled(m_startLeft, m_startRight) >= m_distanceInches;
+    	if(m_distanceInches > 0)
+    	{
+    		return Robot.getDriveBase().straightDistanceTraveled(m_startLeft, m_startRight) >= m_distanceInches;
+    	}
+    	else
+    	{
+    		return Robot.getDriveBase().straightDistanceTraveled(m_startLeft, m_startRight) <= m_distanceInches;
+    	}
     }
 
     // Called once after isFinished returns true

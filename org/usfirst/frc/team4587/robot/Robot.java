@@ -19,6 +19,7 @@ import org.usfirst.frc.team4587.robot.commands.AutonomousPosition2;
 import org.usfirst.frc.team4587.robot.commands.AutonomousPosition34;
 import org.usfirst.frc.team4587.robot.commands.AutonomousPosition5;
 import org.usfirst.frc.team4587.robot.commands.AutonomousTest;
+import org.usfirst.frc.team4587.robot.commands.AutonomousWorlds;
 import org.usfirst.frc.team4587.robot.commands.CrossDefenseAndShoot;
 import org.usfirst.frc.team4587.robot.commands.LowbarAndShoot;
 import org.usfirst.frc.team4587.robot.commands.Wait;
@@ -129,14 +130,14 @@ public class Robot extends IterativeRobot implements LogDataSource {
     	return m_extensionsUp;
     }
     
-    private DigitalInput m_positionSwitchZero;
-    private DigitalInput m_positionSwitchOne;
-    private DigitalInput m_positionSwitchTwo;
-    private DigitalInput m_positionSwitchThree;
-    private DigitalInput m_defenseSwitchZero;
-    private DigitalInput m_defenseSwitchOne;
-    private DigitalInput m_defenseSwitchTwo;
-    private DigitalInput m_defenseSwitchThree;
+    private static DigitalInput m_positionSwitchZero;
+    private static DigitalInput m_positionSwitchOne;
+    private static DigitalInput m_positionSwitchTwo;
+    private static DigitalInput m_positionSwitchThree;
+    private static DigitalInput m_defenseSwitchZero;
+    private static DigitalInput m_defenseSwitchOne;
+    private static DigitalInput m_defenseSwitchTwo;
+    private static DigitalInput m_defenseSwitchThree;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -179,6 +180,9 @@ public class Robot extends IterativeRobot implements LogDataSource {
 			m_positionSwitchOne = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_1));
 			m_positionSwitchTwo = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_2));
 			m_positionSwitchThree = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_3));
+			
+			SmartDashboard.putNumber("defense number: ", getFieldDefense());
+			SmartDashboard.putNumber("position number: ", getFieldPosition());
     	}
     	m_oi = new OI();
         // Always create OI last, since it creates Command objects that depend on
@@ -208,7 +212,7 @@ public class Robot extends IterativeRobot implements LogDataSource {
         
     }
     
-    private int getFieldPosition()
+    public static int getFieldPosition()
     {
     	return 15 - (1 * (m_positionSwitchZero.get() ? 1:0)
     		 + 2 * (m_positionSwitchOne.get() ? 1:0)
@@ -216,7 +220,7 @@ public class Robot extends IterativeRobot implements LogDataSource {
   			 + 8 * (m_positionSwitchThree.get() ? 1:0));
     }
     
-    private int getFieldDefense()
+    public static int getFieldDefense()
     {
     	return 15 - (1 * (m_defenseSwitchZero.get() ? 1:0)
     		 + 2 * (m_defenseSwitchOne.get() ? 1:0)
@@ -272,7 +276,7 @@ public class Robot extends IterativeRobot implements LogDataSource {
     				break;
     			}
     		}*/
-    		autonomousCommand = new LowbarAndShoot();
+    		autonomousCommand = new AutonomousWorlds();
     		System.out.println(autonomousCommand);
             //autonomousCommand.start();
             

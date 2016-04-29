@@ -79,8 +79,8 @@ public class DriveBase extends Subsystem implements LogDataSource {
 		m_lastLeftEncoderValue = getEncoderLeft();
 		m_lastRightEncoderValue = getEncoderRight();
 		
-		m_leftAdjuster = Parameters.getDouble("Left Motor Adjuster", 0.9);
-		m_rightAdjuster = Parameters.getDouble("Right Motor Adjuster", 1.0);
+		m_leftAdjuster = Parameters.getDouble("Left Motor Adjuster", 1.0);
+		m_rightAdjuster = Parameters.getDouble("Right Motor Adjuster", 0.9);
 		m_tolerance = Parameters.getInt("Drive Base Tolerance", 5);
 		m_balance = Parameters.getDouble("Drive Base Balance", .0625);
 		
