@@ -22,6 +22,7 @@ import org.usfirst.frc.team4587.robot.commands.AutonomousTest;
 import org.usfirst.frc.team4587.robot.commands.AutonomousWorlds;
 import org.usfirst.frc.team4587.robot.commands.CrossDefenseAndShoot;
 import org.usfirst.frc.team4587.robot.commands.LowbarAndShoot;
+import org.usfirst.frc.team4587.robot.commands.PortcullisTest;
 import org.usfirst.frc.team4587.robot.commands.Wait;
 import org.usfirst.frc.team4587.robot.subsystems.ArmPiston;
 import org.usfirst.frc.team4587.robot.subsystems.Catapult;

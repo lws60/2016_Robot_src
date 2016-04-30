@@ -11,6 +11,8 @@ public class AutonomousTest extends CommandGroup {
     	// rough terrain addSequential(new AutonomousDriveStraightDistance(135, 0.6));
     	// rock wall addSequential(new AutonomousDriveStraightDistance(210, 0.9));
     	
+    	addSequential(new AutonomousDriveStraightDistance(100, 0.5));
+    	
     	//cheval
         /*addSequential(new AutonomousDriveStraightDistance(58, 0.2));
 		addSequential(new ToggleArmPiston());

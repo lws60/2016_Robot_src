@@ -8,9 +8,9 @@ import utility.Parameters;
 /**
  *
  */
-public class LowbarAndShoot extends CommandGroup {
+public class PortcullisTest extends CommandGroup {
     
-    public  LowbarAndShoot() {
+    public  PortcullisTest() {
         // Add Commands here:
     	//if (Robot.isExtensionsUp())
     	//{
@@ -26,8 +26,9 @@ public class LowbarAndShoot extends CommandGroup {
     	//}
     	addSequential(new AutonomousDriveStraightDistance(
         		Parameters.getInt("Leg 1 Distance (inches)", 160), 
-        		Parameters.getDouble("Leg 1 Speed", 0.4)));
-    	addSequential(new AutonomousDriveStraightISH(180, 0.7, 0.15));
+        		Parameters.getDouble("Leg 1 Speed", 0.7)));
+    	addSequential(new AutonomousTurnToAngle(-15, 0.8, 2.5));
+    	//addSequential(new AutonomousDriveStraightISH(180, 0.7, 0.4));
         /*addSequential(new AutonomousTurnToAngle(
         		Parameters.getDouble("Turn 1 Angle (degrees)", 0.0), 
         		Parameters.getDouble("Turn 1 Speed", 0.6)));*/
@@ -36,11 +37,11 @@ public class LowbarAndShoot extends CommandGroup {
         		//Parameters.getInt("Leg 2 Distance (inches)", 24), 
         		//Parameters.getDouble("Leg 2 Speed", 0.6)));
     	addSequential(new ToggleIntakePiston());
-        addSequential(new Wait(50));
-        addSequential(new AutonomousTurnToAngle(
+        addSequential(new Wait(25));
+        /*addSequential(new AutonomousTurnToAngle(
         		Parameters.getDouble("Turn 2 Angle (degrees)", 60.0), 
         		Parameters.getDouble("Turn 2 Speed", 0.8),
-        		Parameters.getDouble("Turn 2 Tolerance (degrees)", 2.5)));
+        		Parameters.getDouble("Turn 2 Tolerance (degrees)", 2.5)));*/
         
         //addSequential(new AutomaticAim(45, 0.6));
         
