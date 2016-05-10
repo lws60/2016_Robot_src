@@ -30,7 +30,7 @@ public class AutonomousWorlds extends CommandGroup {
     	case RobotMap.CHEVAL:
 	    		//cheval
 	        addSequential(new AutonomousDriveStraightDistance(56, 0.2));
-			addSequential(new ToggleArmPiston());
+			addSequential(new ArmDown());
 			addSequential(new Wait(75));
 			addSequential(new AutonomousDriveStraightDistance(150, 0.7));
 			addSequential(new Wait(25));
@@ -43,24 +43,24 @@ public class AutonomousWorlds extends CommandGroup {
     		break;
     	case RobotMap.ROCK_WALL:
     		addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Rock Wall Distance", 210), Parameters.getDouble("Rock Wall Speed", 0.9)));
-    		addSequential(new ToggleArmPiston());
+    		addSequential(new ArmDown());
     		addSequential(new Wait(25));
     		defenseName = "rock wall";
     		break;
     	case RobotMap.ROUGH_TERRAIN:
     		addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Rough Terrain Distance", 135), Parameters.getDouble("Rough Terrain Speed", 0.6)));
-    		addSequential(new ToggleArmPiston());
+    		addSequential(new ArmDown());
     		addSequential(new Wait(25));
     		defenseName = "rough terrain";
     		break;
     	case RobotMap.MOAT:
     		addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Moat Distance", 210), Parameters.getDouble("Moat Speed", 0.9)));
-    		addSequential(new ToggleArmPiston());
+    		addSequential(new ArmDown());
     		addSequential(new Wait(25));
     		defenseName = "moat";
     		break;
     	case RobotMap.PORTCULLIS:
-    		addSequential(new ToggleArmPiston());
+    		addSequential(new ArmDown());
     		addSequential(new Wait(25));
     		addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Portcullis Distance", 160), Parameters.getDouble("Portcullis Speed", 0.7)));
     		addSequential(new Wait(25));
@@ -71,22 +71,22 @@ public class AutonomousWorlds extends CommandGroup {
 		switch (position)
 		{
 		case 2:
-			addSequential(new ToggleArmPiston());
-			addSequential(new Wait(50));
 	    	addSequential(new AutonomousTurnToAngle(90, 0.8, 2.5));
 	    	addSequential(new Wait(25));
 	    	addSequential(new AutonomousDriveStraightDistance(45, 0.7));
 	    	addSequential(new Wait(25));
 	    	addSequential(new AutonomousTurnToAngle(20, 0.8, 2.5));
+	    	addSequential(new ArmDown());
+	    	addSequential(new Wait(50));
 	    	addSequential(new Aim(0.7, 1));
 	    	addSequential(new ToggleIntakePiston());
 	    	addSequential(new Wait(75));
 	    	addSequential(new HighShot());
 	    	break;
 		case 3:
-			addSequential(new ToggleArmPiston());
-			addSequential(new Wait(50));
 			addSequential(new AutonomousTurnToAngle(Parameters.getInt("Position 3 Turn Angle", 17), Parameters.getDouble("Position 3 Turn Speed", 0.7), Parameters.getDouble("Position 3 Turn Tolerance", 2.5)));
+	    	addSequential(new ArmDown());
+	    	addSequential(new Wait(50));
 			addSequential(new Aim(0.7, 1));
 			addSequential(new ToggleIntakePiston());
 			addSequential(new Wait(75));
@@ -94,6 +94,8 @@ public class AutonomousWorlds extends CommandGroup {
 			addSequential(new HighShot());
 			break;
 		case 4:
+	    	addSequential(new ArmDown());
+	    	addSequential(new Wait(50));
 			addSequential(new Aim(0.7, 1));
 			addSequential(new ToggleIntakePiston());
 			addSequential(new Wait(75));
@@ -107,13 +109,13 @@ public class AutonomousWorlds extends CommandGroup {
 	    	addSequential(new ToggleIntakePiston());
 	    	addSequential(new Wait(25));
 	    	addSequential(new HighShot());*/
-			addSequential(new ToggleArmPiston());
-			addSequential(new Wait(50));
 			addSequential(new AutonomousTurnToAngle(-90, 0.8, 2.5));
 	    	addSequential(new Wait(25));
 	    	addSequential(new AutonomousDriveStraightDistance(45, 0.7));
 	    	addSequential(new Wait(25));
 	    	addSequential(new AutonomousTurnToAngle(0, 0.8, 2.5));
+	    	addSequential(new ArmDown());
+	    	addSequential(new Wait(50));
 	    	addSequential(new Aim(0.7, 1));
 	    	addSequential(new ToggleIntakePiston());
 	    	addSequential(new Wait(75));
