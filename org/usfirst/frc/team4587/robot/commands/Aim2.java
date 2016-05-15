@@ -10,22 +10,27 @@ import utility.Gyro;
 /**
  *
  */
-public class Aim extends Command {
+public class Aim2 extends Command {
 
 	private CameraThread m_cameraThread;
 	private boolean m_onTarget;
 	private boolean m_moving;
 	private double m_desiredYaw;
+	private double m_lastYaw;
+	private double m_intervalTolerance;
 	private double m_tolerance;
 	private double m_speed;
+	private double m_degreesPerSecond;
 	
 	private int count;
 	
-    public Aim(double speed, double tolerance) {
+    public Aim2(double speed, double degreesPerSecond, double intervalTolerance, double tolerance) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.getDriveBase());
     	m_speed = speed;
+    	m_degreesPerSecond = degreesPerSecond;
+    	m_intervalTolerance = intervalTolerance;
     	m_tolerance = tolerance;
     }
 
@@ -64,7 +69,27 @@ public class Aim extends Command {
 	        	{
 	        		direction = -1;
 	        	}
-	        	Robot.getDriveBase().teleopDrive(0.2, m_speed * direction);
+	        	
+	        	if (((Gyro.getYaw() - m_lastYaw) * direction) - (m_degreesPerSecond / 50) > m_intervalTolerance)
+	        	{
+	        		m_speed -= 0.05;
+	        	}
+	        	else if (((Gyro.getYaw() - m_lastYaw) * direction) - (m_degreesPerSecond / 50) < (m_intervalTolerance * -1))
+	        	{
+	        		m_speed += 0.05;
+	        	}
+	        	
+	        	if (m_speed < 0)
+	        	{
+	        		m_speed = 0.0;
+	        	}
+	        	else if (m_speed > 1)
+	        	{
+	        		m_speed = 1.0;
+	        	}
+	        	
+	        	Robot.getDriveBase().teleopDrive(0.0, m_speed * direction);
+	        	m_lastYaw = Gyro.getYaw();
         	}
     	}
     	else
@@ -84,6 +109,10 @@ public class Aim extends Command {
 	    	}
     	}
     	SmartDashboard.putNumber("Desired Yaw", m_desiredYaw);
+    	
+    	System.out.println("speed: " + m_speed);
+    	System.out.println("desired yaw: " + m_desiredYaw);
+    	System.out.println("is moving: " + m_moving);
     }
 
     // Make this return true when this Command no longer needs to run execute()

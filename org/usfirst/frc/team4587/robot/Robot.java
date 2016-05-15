@@ -357,6 +357,8 @@ public class Robot extends IterativeRobot implements LogDataSource {
     public void gatherValues ( ValueLogger logger )
     {
     	logger.logDoubleValue ( "Gyro Yaw", Gyro.getYaw() );
+    	logger.logDoubleValue ( "Gyro Pitch", Gyro.getPitch() );
+    	logger.logDoubleValue ( "Gyro Roll", Gyro.getRoll() );	
     	logger.logBooleanValue( "IMU_Connected", Gyro.IMU_Connected() );
     	logger.logBooleanValue( "IMU_IsCalibrating", Gyro.IMU_IsCalibrating() );
     }

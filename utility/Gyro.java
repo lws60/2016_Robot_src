@@ -64,6 +64,16 @@ public class Gyro
 		 initializeGyro();
 		 return m_gyro.getYaw();
 	 }
+	 public static double getPitch()
+	 {
+		 initializeGyro();
+		 return m_gyro.getPitch();
+	 }
+	 public static double getRoll()
+	 {
+		 initializeGyro();
+		 return m_gyro.getRoll();
+	 }
 	 public static boolean IMU_Connected()
 	 {
 		 return m_gyro.isConnected();

@@ -42,19 +42,28 @@ public class AutonomousWorlds extends CommandGroup {
     		defenseName = "low bar";
     		break;
     	case RobotMap.ROCK_WALL:
-    		addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Rock Wall Distance", 210), Parameters.getDouble("Rock Wall Speed", 0.9)));
+    		//addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Rock Wall Distance", 210), Parameters.getDouble("Rock Wall Speed", 0.9)));
+    		addSequential(new AutonomousDriveStraightDistance(56, 0.4));
+    		addSequential(new AutonomousDriveOverStaticDefense(0.4));
+    		addSequential(new AutonomousDriveStraightDistance(10, 0.4));
     		addSequential(new ArmDown());
     		addSequential(new Wait(25));
     		defenseName = "rock wall";
     		break;
     	case RobotMap.ROUGH_TERRAIN:
-    		addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Rough Terrain Distance", 135), Parameters.getDouble("Rough Terrain Speed", 0.6)));
+    		//addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Rough Terrain Distance", 135), Parameters.getDouble("Rough Terrain Speed", 0.6)));
+    		addSequential(new AutonomousDriveStraightDistance(56, 0.4));
+    		addSequential(new AutonomousDriveOverStaticDefense(0.4));
+    		addSequential(new AutonomousDriveStraightDistance(10, 0.4));
     		addSequential(new ArmDown());
     		addSequential(new Wait(25));
     		defenseName = "rough terrain";
     		break;
     	case RobotMap.MOAT:
-    		addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Moat Distance", 210), Parameters.getDouble("Moat Speed", 0.9)));
+    		//addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Moat Distance", 210), Parameters.getDouble("Moat Speed", 0.9)));
+    		addSequential(new AutonomousDriveStraightDistance(56, 0.4));
+    		addSequential(new AutonomousDriveOverStaticDefense(0.4));
+    		addSequential(new AutonomousDriveStraightDistance(10, 0.4));
     		addSequential(new ArmDown());
     		addSequential(new Wait(25));
     		defenseName = "moat";

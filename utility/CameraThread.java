@@ -101,7 +101,7 @@ public class CameraThread extends Thread{
             	targetCam.closeCamera();*/
 
     	    m_cameraSession = NIVision.IMAQdxOpenCamera (
-                                  Parameters.getString("Camera Name","cam0")
+                                  Parameters.getString("Camera Name","cam3")
                                 , NIVision.IMAQdxCameraControlMode.CameraControlModeController
                               );
     	    
@@ -146,6 +146,7 @@ public class CameraThread extends Thread{
                                   , 1 // connectivity8
                                 );
 
+            /* Competition Robot
             m_hueRange        = new NIVision.Range (
                                     Parameters.getInt("HSV Filter Min. Hue",50)
                                   , Parameters.getInt("HSV Filter Max. Hue",130)
@@ -158,6 +159,20 @@ public class CameraThread extends Thread{
                                     Parameters.getInt("HSV Filter Min. Value",10)
                                   , Parameters.getInt("HSV Filter Max. Value",120)
                                 );
+            */
+            //Practice Robot
+            m_hueRange        = new NIVision.Range (
+                    Parameters.getInt("HSV Filter Min. Hue",100)
+                  , Parameters.getInt("HSV Filter Max. Hue",130)
+                );
+            m_saturationRange = new NIVision.Range (
+                    Parameters.getInt("HSV Filter Min. Saturation",220)
+                  , Parameters.getInt("HSV Filter Max. Saturation",255)
+                );
+            m_valueRange      = new NIVision.Range (
+                    Parameters.getInt("HSV Filter Min. Value",100)
+                  , Parameters.getInt("HSV Filter Max. Value",200)
+                );
             
             m_redRange        = new NIVision.Range (
                     Parameters.getInt("RGB Filter Min. RED",225)
