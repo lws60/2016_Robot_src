@@ -3,6 +3,7 @@ package org.usfirst.frc.team4587.robot.commands;
 import org.usfirst.frc.team4587.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -36,6 +37,9 @@ public class AutonomousDriveStraightDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	SmartDashboard.putNumber("distancetraveled", Robot.getDriveBase().straightDistanceTraveled(m_startLeft, m_startRight));
+    	SmartDashboard.putNumber("startLeft", m_startLeft);
+    	SmartDashboard.putNumber("startRight", m_startRight);
     	if(m_distanceInches > 0)
     	{
     		return Robot.getDriveBase().straightDistanceTraveled(m_startLeft, m_startRight) >= m_distanceInches;

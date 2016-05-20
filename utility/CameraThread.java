@@ -101,7 +101,7 @@ public class CameraThread extends Thread{
             	targetCam.closeCamera();*/
 
     	    m_cameraSession = NIVision.IMAQdxOpenCamera (
-                                  Parameters.getString("Camera Name","cam3")
+                                  Parameters.getString("Camera Name","cam0")
                                 , NIVision.IMAQdxCameraControlMode.CameraControlModeController
                               );
     	    

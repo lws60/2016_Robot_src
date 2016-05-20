@@ -25,9 +25,9 @@ public class LowbarAndShoot extends CommandGroup {
     		addSequential(new Wait(50));
     	//}
     	addSequential(new AutonomousDriveStraightDistance(
-        		Parameters.getInt("Leg 1 Distance (inches)", 160), 
+        		Parameters.getInt("Leg 1 Distance (inches)", 72), //160
         		Parameters.getDouble("Leg 1 Speed", 0.4)));
-    	addSequential(new AutonomousDriveStraightISH(180, 0.7, 0.15));
+    	/*addSequential(new AutonomousDriveStraightISH(180, 0.7, 0.15));
         /*addSequential(new AutonomousTurnToAngle(
         		Parameters.getDouble("Turn 1 Angle (degrees)", 0.0), 
         		Parameters.getDouble("Turn 1 Speed", 0.6)));*/
@@ -35,7 +35,7 @@ public class LowbarAndShoot extends CommandGroup {
         //addSequential(new AutonomousDriveStraight(
         		//Parameters.getInt("Leg 2 Distance (inches)", 24), 
         		//Parameters.getDouble("Leg 2 Speed", 0.6)));
-    	addSequential(new ToggleIntakePiston());
+    	/*addSequential(new ToggleIntakePiston());
         addSequential(new Wait(50));
         addSequential(new AutonomousTurnToAngle(
         		Parameters.getDouble("Turn 2 Angle (degrees)", 60.0), 
@@ -49,7 +49,7 @@ public class LowbarAndShoot extends CommandGroup {
         addSequential(new ToggleIntakePiston());
         addSequential(new Wait(50));
         
-        addSequential(new HighShot());
+        addSequential(new HighShot());*/
         // these will run in order.
 
         // To run multiple commands at the same time,

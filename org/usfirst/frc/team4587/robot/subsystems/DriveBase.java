@@ -79,9 +79,9 @@ public class DriveBase extends Subsystem implements LogDataSource {
 		m_lastLeftEncoderValue = getEncoderLeft();
 		m_lastRightEncoderValue = getEncoderRight();
 		
-		m_leftAdjuster = Parameters.getDouble("Left Motor Adjuster", 0.95);
-		m_rightAdjuster = Parameters.getDouble("Right Motor Adjuster", 1.0);
-		m_tolerance = Parameters.getInt("Drive Base Tolerance", 5);
+		m_leftAdjuster = Parameters.getDouble("Left Motor Adjuster", 1.0);
+		m_rightAdjuster = Parameters.getDouble("Right Motor Adjuster", 0.8);
+		m_tolerance = Parameters.getInt("Drive Base Tolerance", 1);
 		m_balance = Parameters.getDouble("Drive Base Balance", .0625);
 		
 		m_wheelDiameter = Parameters.getDouble("Wheel Diameter (inches)", 7.65);
@@ -178,7 +178,7 @@ public class DriveBase extends Subsystem implements LogDataSource {
 	{
 		int deltaLeft = getEncoderLeft() - startLeft;
 		int deltaRight = getEncoderRight() - startRight;
-		double average = deltaLeft + deltaRight / 2.0;
+		double average = (deltaLeft + deltaRight) / 2.0;
 		return average / m_encoderDotsPerRev * m_encoderGearTeeth / m_wheelGearTeeth * Math.PI * m_wheelDiameter;
 	}
 	
