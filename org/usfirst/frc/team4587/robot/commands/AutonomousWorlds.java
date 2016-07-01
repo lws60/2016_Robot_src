@@ -29,23 +29,51 @@ public class AutonomousWorlds extends CommandGroup {
     	{
     	case RobotMap.CHEVAL:
 	    		//cheval
-	        addSequential(new AutonomousDriveStraightDistance(56, 0.2));
+	        addSequential(new AutonomousDriveStraightDistance(27, 0.5));
 			addSequential(new ArmDown());
 			addSequential(new Wait(75));
-			addSequential(new AutonomousDriveStraightDistance(150, 0.7));
+			addSequential(new AutonomousDriveStraightDistance(95, 0.7));
 			addSequential(new Wait(25));
     		defenseName = "cheval";
 			break;
     	case RobotMap.LOW_BAR:
     		//low bar
-    		addSequential(new LowbarAndShoot());
+    		//addSequential(new LowbarAndShoot());
+    		addSequential(new ArmDown());
+    		addSequential(new Wait(20));
+    		addSequential(new ToggleIntakePiston());
+    		addParallel(new StartIntakeMotors(1.0));
+    		addSequential(new Wait(75));
+    		addParallel(new StartIntakeMotors(0.0));
+    		addSequential(new AutonomousDriveStraightDistance(10, 0.6));
+    		addSequential(new AutonomousTurnToAngle(-12, 0.7, 2.5));
+    		addSequential(new AutonomousDriveStraightDistance(12, 0.6));
+    		addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
+    		addSequential(new AutonomousDriveStraightDistance(95, 0.6));
+    		addSequential(new AutonomousTurnToAngle(25, 0.7, 2.5));
+    		addSequential(new ArmDown());
+	    	addSequential(new Wait(35));
+			addSequential(new Aim(0.7, 1));
+			addSequential(new Wait(5));
+			addSequential(new Aim(0.7, 1));
+			addSequential(new Wait(35));
+			addSequential(new HighShot());
+			/*addSequential(new Wait(15));
+    		addSequential(new AutonomousDriveStraightDistance(-7, -0.6));
+    		addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
+    		addSequential(new AutonomousDriveStraightDistance(-40, -0.5));
+    		addSequential(new AutonomousDriveStraightDistance(-30, -0.2));
+    		addParallel(new StartIntakeMotors(1.0));
+    		addSequential(new Wait(75));
+    		addParallel(new StartIntakeMotors(0.0));*/
+    		
     		defenseName = "low bar";
     		break;
     	case RobotMap.ROCK_WALL:
-    		//addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Rock Wall Distance", 210), Parameters.getDouble("Rock Wall Speed", 0.9)));
-    		addSequential(new AutonomousDriveStraightDistance(56, 0.4));
-    		addSequential(new AutonomousDriveOverStaticDefense(0.4));
-    		addSequential(new AutonomousDriveStraightDistance(10, 0.4));
+    		addSequential(new AutonomousDriveStraightDistance(195, Parameters.getDouble("Rock Wall Speed", 0.9)));
+    		/*addSequential(new AutonomousDriveStraightDistance(56, 0.7));
+    		addSequential(new AutonomousDriveOverStaticDefense(0.7));
+    		addSequential(new AutonomousDriveStraightDistance(10, 0.4));*/
     		addSequential(new ArmDown());
     		addSequential(new Wait(25));
     		defenseName = "rock wall";
@@ -80,27 +108,57 @@ public class AutonomousWorlds extends CommandGroup {
 		switch (position)
 		{
 		case 2:
-	    	addSequential(new AutonomousTurnToAngle(90, 0.8, 2.5));
+	    	addSequential(new AutonomousTurnToAngle(90, 0.7, 2.5));
 	    	addSequential(new Wait(25));
-	    	addSequential(new AutonomousDriveStraightDistance(45, 0.7));
+	    	addSequential(new AutonomousDriveStraightDistance(28, 0.7));
 	    	addSequential(new Wait(25));
 	    	addSequential(new AutonomousTurnToAngle(20, 0.8, 2.5));
 	    	addSequential(new ArmDown());
-	    	addSequential(new Wait(50));
+	    	addSequential(new Wait(35));
 	    	addSequential(new Aim(0.7, 1));
 	    	addSequential(new ToggleIntakePiston());
-	    	addSequential(new Wait(75));
+	    	addSequential(new Wait(25));
+	    	addSequential(new Aim(0.7, 1));
 	    	addSequential(new HighShot());
+	    	addSequential(new Wait(25));
+	    	addSequential(new AutonomousTurnToAngle(0, 0.8, 2.5));
+	    	addSequential(new Wait(25));
+	    	addSequential(new AutonomousDriveStraightDistance(-135, -0.7));
 	    	break;
 		case 3:
-			addSequential(new AutonomousTurnToAngle(Parameters.getInt("Position 3 Turn Angle", 17), Parameters.getDouble("Position 3 Turn Speed", 0.7), Parameters.getDouble("Position 3 Turn Tolerance", 2.5)));
+			addSequential(new AutonomousTurnToAngle(Parameters.getInt("Position 3 Turn Angle", 7), Parameters.getDouble("Position 3 Turn Speed", 0.65), Parameters.getDouble("Position 3 Turn Tolerance", 2.5)));
 	    	addSequential(new ArmDown());
-	    	addSequential(new Wait(50));
+	    	addSequential(new Wait(35));
 			addSequential(new Aim(0.7, 1));
 			addSequential(new ToggleIntakePiston());
-			addSequential(new Wait(75));
+			addSequential(new Wait(25));
 			addSequential(new Aim(0.7, 1));
+			addSequential(new Wait(35));
 			addSequential(new HighShot());
+			addSequential(new Wait(25));
+			addSequential(new AutonomousTurnToAngle(0, 0.8, 2.5));
+			//addParallel(new StartIntakeMotors(1.0));
+			//addSequential(new AutonomousDriveStraightDistance(-162, -0.7));
+			addSequential(new AutonomousDriveStraightDistance(-135, -0.7));
+			/*addSequential(new Wait(20));
+			addSequential(new ArmUp());
+			addSequential(new AutonomousTurnToAngle(0, 0.8, 2.5));
+			addSequential(new Wait(20));
+			addSequential(new ToggleIntakePiston());
+			addParallel(new StartIntakeMotors(0.0));
+			addSequential(new AutonomousDriveStraightDistance(180, Parameters.getDouble("Rock Wall Speed", 0.9)));
+			addSequential(new ArmDown());
+    		addSequential(new Wait(25));
+    		
+    		addSequential(new AutonomousTurnToAngle(Parameters.getInt("Position 3 Turn Angle", 7), Parameters.getDouble("Position 3 Turn Speed", 0.65), Parameters.getDouble("Position 3 Turn Tolerance", 2.5)));
+	    	addSequential(new ArmDown());
+	    	addSequential(new Wait(25));
+			addSequential(new Aim(0.7, 1));
+			addSequential(new ToggleIntakePiston());
+			addSequential(new Wait(15));
+			addSequential(new Aim(0.7, 1));
+			addSequential(new Wait(15));
+			addSequential(new HighShot());*/
 			break;
 		case 4:
 	    	addSequential(new ArmDown());
@@ -109,6 +167,9 @@ public class AutonomousWorlds extends CommandGroup {
 			addSequential(new ToggleIntakePiston());
 			addSequential(new Wait(75));
 			addSequential(new HighShot());
+			//addSequential(new Wait(25));
+			//addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
+			//addSequential(new AutonomousDriveStraightDistance(-140, -0.7));
 			break;
 		case 5:
 			/*addSequential(new AutonomousDriveStraight(Parameters.getInt("Position 5 Back Up Distance", -20), Parameters.getDouble("Position 5 Back Up Speed", -0.5)));

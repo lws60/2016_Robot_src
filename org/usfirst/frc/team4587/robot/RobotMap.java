@@ -43,7 +43,8 @@ public class RobotMap {
     public static final int ENCODER_LEFT_DRIVE_A = 6;
     public static final int ENCODER_LEFT_DRIVE_B = 7;
 
-    public static final int POSITION_SWITCH_0 = 0;
+    public static final int POSITION_SWITCH_0  
+    = 0;
     public static final int POSITION_SWITCH_1 = 1;
     public static final int POSITION_SWITCH_2 = 2;
     public static final int POSITION_SWITCH_3 = 3;

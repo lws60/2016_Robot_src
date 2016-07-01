@@ -74,6 +74,8 @@ public class CameraThread extends Thread{
 	private static double                              m_maxSideRatio;
 	
 	private static double m_desiredCenterLine;
+	
+	private static boolean m_OK = false;
 
         // Call this once from robotInit(), after reading parameters.
         public static void initializeOnce() {
@@ -100,10 +102,27 @@ public class CameraThread extends Thread{
             	SmartDashboard.putNumber("Current Brightness", updatedBrightness);
             	targetCam.closeCamera();*/
 
-    	    m_cameraSession = NIVision.IMAQdxOpenCamera (
-                                  Parameters.getString("Camera Name","cam0")
-                                , NIVision.IMAQdxCameraControlMode.CameraControlModeController
-                              );
+            int camNum = 0;
+            while (camNum <= 3)
+            {
+            	try
+            	{
+            		m_cameraSession = NIVision.IMAQdxOpenCamera (
+                            Parameters.getString("Camera Name","cam" + camNum)
+                          , NIVision.IMAQdxCameraControlMode.CameraControlModeController
+                        );
+            		break;
+            	}
+            	catch (Exception e)
+            	{
+            		camNum ++;
+            	}
+            }
+    	    if (camNum > 3)
+    	    {
+    	    	return;
+    	    }
+    	    m_OK = true;
     	    
     	    NIVision.IMAQdxSetAttributeString(m_cameraSession, ATTR_WB_MODE, "Manual");
     	    long minv = NIVision.IMAQdxGetAttributeMinimumI64(m_cameraSession, ATTR_WB_VALUE);
@@ -130,6 +149,10 @@ public class CameraThread extends Thread{
 
         // Call this during each phase initialization, after reading parameters.
         public static void initializeForPhase() {
+        	if (!m_OK)
+        	{
+        		return;
+        	}
             m_particleCriteria = new NIVision.ParticleFilterCriteria2[1];
             m_particleCriteria[0] = new NIVision.ParticleFilterCriteria2 (
                                         NIVision.MeasurementType.MT_AREA_BY_IMAGE_AREA
@@ -146,8 +169,8 @@ public class CameraThread extends Thread{
                                   , 1 // connectivity8
                                 );
 
-            /* Competition Robot
-            m_hueRange        = new NIVision.Range (
+            //safety green LED Ring
+            /*m_hueRange        = new NIVision.Range (
                                     Parameters.getInt("HSV Filter Min. Hue",50)
                                   , Parameters.getInt("HSV Filter Max. Hue",130)
                                 );
@@ -158,9 +181,9 @@ public class CameraThread extends Thread{
             m_valueRange      = new NIVision.Range (
                                     Parameters.getInt("HSV Filter Min. Value",10)
                                   , Parameters.getInt("HSV Filter Max. Value",120)
-                                );
-            */
-            //Practice Robot
+                                );*/
+            
+            //Neo Pixel
             m_hueRange        = new NIVision.Range (
                     Parameters.getInt("HSV Filter Min. Hue",100)
                   , Parameters.getInt("HSV Filter Max. Hue",130)
@@ -189,7 +212,7 @@ public class CameraThread extends Thread{
 
             m_minWidth      = Parameters.getDouble("Goal Filter: Min. Width (pixels)",  15.0);
             m_minHeight     = Parameters.getDouble("Goal Filter: Min. Height (pixels)", 10.0);
-            m_minAspect     = Parameters.getDouble("Goal Filter: Min. Aspect Ratio",     1.2);
+            m_minAspect     = Parameters.getDouble("Goal Filter: Min. Aspect Ratio",     1.0);
             m_maxAspect     = Parameters.getDouble("Goal Filter: Max. Aspect Ratio",     2.3);
             m_minFill       = Parameters.getDouble("Goal Filter: Min. Fill Ratio",       0.1);
             m_maxFill       = Parameters.getDouble("Goal Filter: Max. Fill Ratio",       0.4);
@@ -199,7 +222,7 @@ public class CameraThread extends Thread{
             m_desiredLeftGoalAlignment = Parameters.getInt("Desired Left Edge of Goal", 275);
             m_leftGoalAlignmentTolerance = Parameters.getInt("Tolerance for Left Edge of Goal", 10);
             
-            m_desiredCenterLine = Parameters.getInt("Desired Center Line", 300);
+            m_desiredCenterLine = Parameters.getInt("Desired Center Line", 309);
         }
 
         // Nothing to do in the constructor for a single thread.
@@ -208,6 +231,10 @@ public class CameraThread extends Thread{
 
         // Process the current camera image.
 	public void run() {
+    	if (!m_OK)
+    	{
+    		return;
+    	}
 		System.out.println("Camera Thread Run");
 		NIVision.IMAQdxGrab(m_cameraSession, m_rawFrame, 1/*waitForNextBuffer*/);
 		//CameraServer.getInstance().setImage(m_rawFrame);
@@ -257,7 +284,9 @@ public class CameraThread extends Thread{
                 int good_particle = -1;
                 double good_left = 0.0;
                 double good_right = 0.0;
+                double good_center = 0.0;
                 double max_area_found = 0;
+                int n_good = 0;
 
                 for ( int iprt = 0; iprt < n_particles; iprt++) {
                     double top    = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
@@ -270,13 +299,13 @@ public class CameraThread extends Thread{
                                                                  NIVision.MeasurementType.MT_BOUNDING_RECT_RIGHT);
                     double area   = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
                                                                  NIVision.MeasurementType.MT_AREA);
-
-		    double width  = right - left;
+                    double center = (right + left) / 2.0;
+                    
+                    double width  = right - left;
                     double height = bottom - top;
                     double aspect = width / height;
                     double fill   = area / (width * height);
 
-                   
                     if (area > max_area_found){
                         max_area_found = area;
                         SmartDashboard.putNumber("Biggest Particle Top",    top);
@@ -300,15 +329,29 @@ public class CameraThread extends Thread{
                     if (fill   > m_maxFill  ) continue;
 
                     //TODO - draw a red box around the bounding box.
-
-                    if (good_particle >= 0) {
+                    ++n_good;
+                    if (n_good > 2) {
                         // We already found one that could be the goal, so give up.
                         good_particle = -2;
                         break;
                     } else {
-                        good_particle = iprt;
-                        good_left     = left;
-                        good_right    = right;
+                    	if (n_good > 1)
+                    	{
+                    		if (Math.abs(center - m_desiredCenterLine) < Math.abs(good_center - m_desiredCenterLine))
+                    		{
+                    			good_particle = iprt;
+                                good_left     = left;
+                                good_right    = right;
+                                good_center = center;
+                    		}
+                    	}
+                    	else 
+                    	{
+                    		good_particle = iprt;
+                    		good_left     = left;
+                    		good_right    = right;
+                    		good_center = center;
+                    	}
                     }
                 }
 
@@ -316,6 +359,7 @@ public class CameraThread extends Thread{
 		//CameraServer.getInstance().setImage(m_binaryFrame);
 
                 SmartDashboard.putNumber("Good Particle", good_particle);
+                SmartDashboard.putNumber("Number Good", n_good);
                 
 
                 if (good_particle < 0)
