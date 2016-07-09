@@ -53,6 +53,12 @@ public class CameraThread extends Thread{
 	private static Image                               m_filtered;
 	private static Image                               m_mask;
 	
+	private static double m_yawWhenPicture;
+	public static double yawWhenPicture()
+	{
+		return m_yawWhenPicture;
+	}
+	
 	private static USBCamera targetCam;
 	private static Image targetFrame;
 	private static int exposure;
@@ -74,6 +80,21 @@ public class CameraThread extends Thread{
 	private static double                              m_maxSideRatio;
 	
 	private static double m_desiredCenterLine;
+	private static double m_desiredLeftYaw;
+	public static double desiredLeftYaw()
+	{
+		return m_desiredLeftYaw;
+	}
+	private static double m_desiredCenterYaw;
+	public static double desiredCenterYaw ()
+	{
+		return m_desiredCenterYaw;
+	}
+	private static double m_desiredRightYaw;
+	public static double desiredRightYaw()
+	{
+		return m_desiredRightYaw;
+	}
 	
 	private static boolean m_OK = false;
 
@@ -213,7 +234,7 @@ public class CameraThread extends Thread{
             m_minWidth      = Parameters.getDouble("Goal Filter: Min. Width (pixels)",  15.0);
             m_minHeight     = Parameters.getDouble("Goal Filter: Min. Height (pixels)", 10.0);
             m_minAspect     = Parameters.getDouble("Goal Filter: Min. Aspect Ratio",     1.0);
-            m_maxAspect     = Parameters.getDouble("Goal Filter: Max. Aspect Ratio",     2.3);
+            m_maxAspect     = Parameters.getDouble("Goal Filter: Max. Aspect Ratio",     2.4);
             m_minFill       = Parameters.getDouble("Goal Filter: Min. Fill Ratio",       0.1);
             m_maxFill       = Parameters.getDouble("Goal Filter: Max. Fill Ratio",       0.4);
             m_minSideRatio  = Parameters.getDouble("Goal Filter: Min. Side Ratio",       0.85);
@@ -237,6 +258,7 @@ public class CameraThread extends Thread{
     	}
 		System.out.println("Camera Thread Run");
 		NIVision.IMAQdxGrab(m_cameraSession, m_rawFrame, 1/*waitForNextBuffer*/);
+		m_yawWhenPicture = Gyro.getYaw();
 		//CameraServer.getInstance().setImage(m_rawFrame);
 
 		//Threshold the image looking for green bright shiny stuff
@@ -399,6 +421,9 @@ public class CameraThread extends Thread{
                 	if (Math.abs(centerline - m_desiredCenterLine) <= m_leftGoalAlignmentTolerance)
                 	{
                 		m_weHaveAShot = true;
+                		m_desiredCenterYaw = m_yawWhenPicture + (m_desiredCenterLine - centerline) * 0.075;
+                		m_desiredLeftYaw = m_desiredCenterYaw - 10 * 0.075;
+                		m_desiredRightYaw = m_desiredCenterYaw + 10 * 0.075;
                 	}
                 	else
                 	{

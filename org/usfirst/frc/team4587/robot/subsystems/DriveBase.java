@@ -87,7 +87,7 @@ public class DriveBase extends Subsystem implements LogDataSource {
 		m_wheelDiameter = Parameters.getDouble("Wheel Diameter (inches)", 7.65);
 		m_encoderDotsPerRev = Parameters.getInt("Drive Encoder Dots Per Revolution", 256);
 		m_encoderGearTeeth = Parameters.getInt("Drive Encoder Gear Teeth", 12);
-		m_wheelGearTeeth = Parameters.getInt("Drive Wheel Gear Teeth", 22);
+		m_wheelGearTeeth = Parameters.getInt("Drive Wheel Gear Teeth", 28);
 	}
 	
 	public int getEncoderLeft()

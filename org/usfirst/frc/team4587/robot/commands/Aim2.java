@@ -98,13 +98,29 @@ public class Aim2 extends Command {
 	    	{
 	    		if (m_cameraThread.weHaveAShot())
 	    		{
-	    			m_onTarget = true;
+	    			if (Gyro.getYaw() >= CameraThread.desiredLeftYaw() && Gyro.getYaw() <= CameraThread.desiredRightYaw())
+	    			{
+	    				m_onTarget = true;
+	    			}
+	    			else
+	    			{
+	    				m_desiredYaw = CameraThread.desiredCenterYaw();
+		    			m_moving = true;
+	    			}
 	    		}
 	    		else
 	    		{
 	    			double pixels = m_cameraThread.shotAngleError();
-	    			m_desiredYaw = Gyro.getYaw() - pixels * 54 / 640;
-	    			m_moving = true;
+	    			//m_desiredYaw = CameraThread.yawWhenPicture() - pixels * 54 / 640;
+	    			m_desiredYaw = CameraThread.yawWhenPicture() - pixels * 0.075;
+	    			if (Math.abs(Gyro.getYaw() - m_desiredYaw) < m_tolerance)
+	    			{
+	    				m_onTarget = true;
+	    			}
+	    			else
+	    			{
+	    				m_moving = true;
+	    			}
 	    		}
 	    	}
     	}
