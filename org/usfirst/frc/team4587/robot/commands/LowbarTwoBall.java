@@ -42,7 +42,7 @@ public class LowbarTwoBall extends CommandGroup {
 		addSequential(new ArmDown());
 		addSequential(new LowerIntake());
     	addSequential(new Wait(35));
-		addSequential(new Aim2(0.3, 13, 0.1, 1));
+		addSequential(new Aim2(0.3, 13, 0.1, 1,0));
 		addSequential(new Wait(35));
 		addSequential(new HighShot());
 		addSequential(new Wait(15));

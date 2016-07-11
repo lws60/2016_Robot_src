@@ -68,7 +68,7 @@ public class OI implements LogDataSource {
     	if ( Robot.iAmARealRobot()) {
     		buttonB1.whenPressed(new DriveWithJoysticks());
     		buttonA1.whenPressed(new RunCameraThread());
-    		buttonX1.whenPressed(new Aim2(0.3, 13, 0.1, 1));
+    		buttonX1.whenPressed(new Aim2(0.3, 10, 0.1, 1, 0.9));
     		//buttonX1.whenPressed(new Aim(0.6, 1));
 	    	//buttonY1.whenPressed(new ToggleFlashlight());
     		//buttonY1.whenPressed(new AutonomousTurnToAngle2(90, 40, 0.0, 1));
