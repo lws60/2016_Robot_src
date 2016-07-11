@@ -311,16 +311,23 @@ public class CameraThread extends Thread{
                 int n_good = 0;
 
                 for ( int iprt = 0; iprt < n_particles; iprt++) {
-                    double top    = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
+                    double top    = 0.0;
+                    double left   = 0.0;
+                    double bottom = 0.0;
+                    double right  = 0.0;
+                    double area   = 0.0;
+                    top    = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
                                                                  NIVision.MeasurementType.MT_BOUNDING_RECT_TOP);
-                    double left   = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
+                    left   = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
                                                                  NIVision.MeasurementType.MT_BOUNDING_RECT_LEFT);
-                    double bottom = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
+                    bottom = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
                                                                  NIVision.MeasurementType.MT_BOUNDING_RECT_BOTTOM);
-                    double right  = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
+                    right  = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
                                                                  NIVision.MeasurementType.MT_BOUNDING_RECT_RIGHT);
-                    double area   = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
-                                                                 NIVision.MeasurementType.MT_AREA);
+                    area   = NIVision.imaqMeasureParticle(m_binaryFrame, iprt, 0/*calibrated*/,
+                    											 NIVision.MeasurementType.MT_AREA);
+                    
+                    
                     double center = (right + left) / 2.0;
                     
                     double width  = right - left;

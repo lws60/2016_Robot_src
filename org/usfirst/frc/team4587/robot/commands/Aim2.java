@@ -21,10 +21,11 @@ public class Aim2 extends Command {
 	private double m_tolerance;
 	private double m_speed;
 	private double m_degreesPerSecond;
+	private double m_degreesToSlow;
 	
 	private int count;
 	
-    public Aim2(double speed, double degreesPerSecond, double intervalTolerance, double tolerance) {
+    public Aim2(double speed, double degreesPerSecond, double intervalTolerance, double tolerance, double degreesToSlow) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.getDriveBase());
@@ -32,6 +33,7 @@ public class Aim2 extends Command {
     	m_degreesPerSecond = degreesPerSecond;
     	m_intervalTolerance = intervalTolerance;
     	m_tolerance = tolerance;
+    	m_degreesToSlow = degreesToSlow;
     }
 
     // Called just before this Command runs the first time
@@ -77,6 +79,11 @@ public class Aim2 extends Command {
 	        	else if (((Gyro.getYaw() - m_lastYaw) * direction) - (m_degreesPerSecond / 50) < (m_intervalTolerance * -1))
 	        	{
 	        		m_speed += 0.05;
+	        	}
+	        	
+	        	if (Math.abs((Gyro.getYaw() - m_lastYaw) + Gyro.getYaw()) >= Math.abs(m_desiredYaw) - m_degreesToSlow)
+	        	{
+	        		m_speed -= 0.5;
 	        	}
 	        	
 	        	if (m_speed < 0)

@@ -73,12 +73,12 @@ public class AutonomousIRI extends CommandGroup {
     		defenseName = "rock wall";
     		break;
     	case RobotMap.ROUGH_TERRAIN:
-    		//addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Rough Terrain Distance", 135), Parameters.getDouble("Rough Terrain Speed", 0.6)));
-    		addSequential(new AutonomousDriveStraightDistance(56, 0.4));
-    		addSequential(new AutonomousDriveOverStaticDefense(0.4));
-    		addSequential(new AutonomousDriveStraightDistance(10, 0.4));
+
+    		addSequential(new AutonomousDriveStraightDistance(169, Parameters.getDouble("Rock Wall Speed", 0.9)));
+    		/*addSequential(new AutonomousDriveStraightDistance(56, 0.7));
+    		addSequential(new AutonomousDriveOverStaticDefense(0.7));
+    		addSequential(new AutonomousDriveStraightDistance(10, 0.4));*/
     		addSequential(new ArmDown());
-    		addSequential(new Wait(25));
     		defenseName = "rough terrain";
     		break;
     	case RobotMap.MOAT:
@@ -90,14 +90,22 @@ public class AutonomousIRI extends CommandGroup {
     		addSequential(new Wait(25));
     		defenseName = "moat";
     		break;
-    	case RobotMap.PORTCULLIS:
+    	/*case RobotMap.PORTCULLIS:
     		addSequential(new ArmDown());
     		addSequential(new Wait(25));
     		addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Portcullis Distance", 160), Parameters.getDouble("Portcullis Speed", 0.7)));
     		addSequential(new Wait(25));
     		defenseName = "portcullis";
+    		break;*/
+    	case RobotMap.RAMPARTS:
+    		addSequential(new AutonomousDriveStraightDistance(169, Parameters.getDouble("Rock Wall Speed", 0.9)));
+    		/*addSequential(new AutonomousDriveStraightDistance(56, 0.7));
+    		addSequential(new AutonomousDriveOverStaticDefense(0.7));
+    		addSequential(new AutonomousDriveStraightDistance(10, 0.4));*/
+    		addSequential(new ArmDown());
     		break;
     	}
+    	
     	
 		SmartDashboard.putString("Defense", defenseName);
     	
@@ -122,40 +130,18 @@ public class AutonomousIRI extends CommandGroup {
 			addSequential(new AutonomousTurnToAngle(7, 0.8, 2.5));
 			addSequential(new LowerIntake());
 	    	addSequential(new Wait(20));
-	    	addSequential(new Aim2(0.3, 13, 0.1, 1));
+	    	addSequential(new Aim2(0.3, 13, 0.1, 1, 0));
 			addSequential(new Wait(10));
 			addSequential(new HighShot());
-			addSequential(new Wait(20));
-			//addSequential(new AutonomousTurnToAngle(0, 0.8, 2.5));
-			//addParallel(new StartIntakeMotors(1.0));
-			//addSequential(new AutonomousDriveStraightDistance(-162, -0.7));
-			//addSequential(new AutonomousDriveStraightDistance(-135, -0.7));
-			/*addSequential(new Wait(20));
-			addSequential(new ArmUp());
-			addSequential(new AutonomousTurnToAngle(0, 0.8, 2.5));
-			addSequential(new Wait(20));
-			addSequential(new ToggleIntakePiston());
-			addParallel(new StartIntakeMotors(0.0));
-			addSequential(new AutonomousDriveStraightDistance(180, Parameters.getDouble("Rock Wall Speed", 0.9)));
-			addSequential(new ArmDown());
-    		addSequential(new Wait(25));
-    		
-    		addSequential(new AutonomousTurnToAngle(Parameters.getInt("Position 3 Turn Angle", 7), Parameters.getDouble("Position 3 Turn Speed", 0.65), Parameters.getDouble("Position 3 Turn Tolerance", 2.5)));
-	    	addSequential(new ArmDown());
-	    	addSequential(new Wait(25));
-			addSequential(new Aim(0.7, 1));
-			addSequential(new ToggleIntakePiston());
-			addSequential(new Wait(15));
-			addSequential(new Aim(0.7, 1));
-			addSequential(new Wait(15));
-			addSequential(new HighShot());*/
+			//addSequential(new Wait(20));
+			
 			break;
 		case 4:
 	    	addSequential(new ArmDown());
+			addSequential(new LowerIntake());
 	    	addSequential(new Wait(50));
-			addSequential(new Aim(0.7, 1));
-			addSequential(new ToggleIntakePiston());
-			addSequential(new Wait(75));
+	    	addSequential(new Aim2(0.3, 13, 0.1, 1, 0));
+			addSequential(new Wait(10));
 			addSequential(new HighShot());
 			//addSequential(new Wait(25));
 			//addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
@@ -186,8 +172,6 @@ public class AutonomousIRI extends CommandGroup {
 		{
 		case 3:
 	    	addSequential(new Wait(20));
-	    	//addSequential(new ArmUp());
-	    	//addSequential(new Wait(25));
 	    	addSequential(new AutonomousTurnToAngle(0, 0.8, 2.5));
 	    	addSequential(new Wait(20));
 	    	addSequential(new AutonomousDriveStraightDistance(-125, -0.8));
@@ -202,16 +186,19 @@ public class AutonomousIRI extends CommandGroup {
 			addSequential(new ToggleIntakePiston());
 			break;
 		case 4:
-	    	addSequential(new Wait(25));
+	    	addSequential(new Wait(20));
 	    	addSequential(new AutonomousTurnToAngle(0, 0.8, 2.5));
-	    	addSequential(new Wait(25));
-	    	addSequential(new AutonomousDriveStraightDistance(-135, -0.7));
+	    	addSequential(new Wait(20));
+	    	addSequential(new AutonomousDriveStraightDistance(-125, -0.8));
 	    	
-			addSequential(new ToggleIntakePiston());
 			addParallel(new StartIntakeMotors(1.0));
-	    	addSequential(new AutonomousDriveStraightDistance(-25, -0.7));
-			addSequential(new Wait(75));
+	    	addSequential(new AutonomousTurnToAngle(2, 0.8, 2.5));
+			addSequential(new LowerIntake());
+	    	addSequential(new AutonomousDriveStraightDistance(-48, -0.6));
+			addSequential(new Wait(35));
 			addParallel(new StartIntakeMotors(0.0));
+			addSequential(new ArmUp());
+			addSequential(new ToggleIntakePiston());
 			break;
 		}
 		
@@ -239,17 +226,12 @@ public class AutonomousIRI extends CommandGroup {
 	    	addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
 			addSequential(new Wait(20));
 			addSequential(new AutonomousDriveStraightDistance(205, Parameters.getDouble("Rock Wall Speed", 0.9)));
-			/*addSequential(new AutonomousDriveStraightDistance(56, 0.7));
-			addSequential(new AutonomousDriveOverStaticDefense(0.7));
-			addSequential(new AutonomousDriveStraightDistance(10, 0.4));*/
-			addSequential(new ArmDown());
-			addSequential(new Wait(20));
-	    	addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
-			addSequential(new Wait(10));
 			defenseName = "rock wall";
 			
+			addSequential(new ArmDown());
 			addSequential(new LowerIntake());
-	    	addSequential(new Aim2(0.3, 13, 0.1, 1));
+			addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
+	    	addSequential(new Aim2(0.3, 13, 0.1, 1, 0));
 			addSequential(new Wait(10));
 			addSequential(new HighShot());
 			break;
@@ -258,17 +240,12 @@ public class AutonomousIRI extends CommandGroup {
 	    	addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
 			addSequential(new Wait(20));
 			addSequential(new AutonomousDriveStraightDistance(190, Parameters.getDouble("Rock Wall Speed", 0.9)));
-			/*addSequential(new AutonomousDriveStraightDistance(56, 0.7));
-			addSequential(new AutonomousDriveOverStaticDefense(0.7));
-			addSequential(new AutonomousDriveStraightDistance(10, 0.4));*/
-			addSequential(new ArmDown());
-			addSequential(new Wait(20));
-	    	addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
-			addSequential(new Wait(10));
 			defenseName = "rock wall";
 			
+			addSequential(new ArmDown());
 			addSequential(new LowerIntake());
-	    	addSequential(new Aim2(0.3, 13, 0.1, 1));
+	    	addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
+	    	addSequential(new Aim2(0.3, 13, 0.1, 1, 0));
 			addSequential(new Wait(10));
 			addSequential(new HighShot());
 			break;
@@ -288,7 +265,7 @@ public class AutonomousIRI extends CommandGroup {
 			addSequential(new Wait(75));
 			addSequential(new HighShot());
 			break;
-		case RobotMap.PORTCULLIS:
+		/*case RobotMap.PORTCULLIS:
 			addSequential(new ArmDown());
 			addSequential(new Wait(25));
 			addSequential(new AutonomousDriveStraightDistance(Parameters.getInt("Portcullis Distance", 160), Parameters.getDouble("Portcullis Speed", 0.7)));
@@ -300,6 +277,20 @@ public class AutonomousIRI extends CommandGroup {
 			addSequential(new Aim(0.7, 1));
 			addSequential(new ToggleIntakePiston());
 			addSequential(new Wait(75));
+			addSequential(new HighShot());
+			break;*/
+		case RobotMap.RAMPARTS:
+			addSequential(new ArmUp());
+	    	addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
+			addSequential(new Wait(20));
+			addSequential(new AutonomousDriveStraightDistance(205, Parameters.getDouble("Rock Wall Speed", 0.9)));
+			defenseName = "rock wall";
+			
+			addSequential(new ArmDown());
+			addSequential(new LowerIntake());
+			addSequential(new AutonomousTurnToAngle(0, 0.7, 2.5));
+	    	addSequential(new Aim2(0.3, 13, 0.1, 1, 0));
+			addSequential(new Wait(10));
 			addSequential(new HighShot());
 			break;
 		}
