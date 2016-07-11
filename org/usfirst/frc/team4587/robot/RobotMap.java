@@ -33,7 +33,7 @@ public class RobotMap {
 	public static final int SOLENOID_WINCH_ENGAGE = 2;
 	/*			DIO Sensors			*/
 	public static final int SWITCH_SHOOTER_EXIT = 0;	// D E L E T E   M E
-    public static final int SWITCH_INTAKE_LIMIT = 1;
+    //public static final int SWITCH_INTAKE_LIMIT = 1;
     public static final int ENCODER_SHOOTER_A = 2;		// D E L E T E   M E
     public static final int ENCODER_SHOOTER_B = 3;		// D E L E T E   M E
     public static final int ENCODER_INTAKE_A = 4;		// D E L E T E   M E
@@ -43,8 +43,7 @@ public class RobotMap {
     public static final int ENCODER_LEFT_DRIVE_A = 6;
     public static final int ENCODER_LEFT_DRIVE_B = 7;
 
-    public static final int POSITION_SWITCH_0  
-    = 0;
+    public static final int POSITION_SWITCH_0 = 0;
     public static final int POSITION_SWITCH_1 = 1;
     public static final int POSITION_SWITCH_2 = 2;
     public static final int POSITION_SWITCH_3 = 3;
@@ -52,6 +51,16 @@ public class RobotMap {
     public static final int DEFENSE_SWITCH_1 = 5;
     public static final int DEFENSE_SWITCH_2 = 6;
     public static final int DEFENSE_SWITCH_3 = 7;
+    
+    public static final int BACK_UP_SWITCH_0 = 0;
+    public static final int BACK_UP_SWITCH_1 = 1;
+    public static final int BACK_UP_SWITCH_2 = 2;
+    public static final int TWO_BALL_SWITCH_0 = 3;
+    public static final int TWO_BALL_SWITCH_1 = 4;
+    public static final int TWO_BALL_SWITCH_2 = 5;
+    
+    public static final int BACK_UP_SWITCH_3 = 6;
+    public static final int TWO_BALL_SWITCH_3 = 7;
     
     public static final int LOW_BAR = 0;
     public static final int ROUGH_TERRAIN = 1;

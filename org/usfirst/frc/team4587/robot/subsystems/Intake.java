@@ -37,13 +37,13 @@ public class Intake extends Subsystem implements LogDataSource {
     }
 
     private DigitalInput m_intakeSwitch;
-    public boolean getIntakeSwitch()
+    /*public boolean getIntakeSwitch()
     {
     	return m_intakeSwitch.get();
-    }
+    }*/
 
     private boolean ball_is_loaded = false;
-    public boolean isBallLoaded()
+    /*public boolean isBallLoaded()
     {
     	if ( ball_is_loaded == false ) {
     		if ( getIntakeSwitch() == false ) {
@@ -51,7 +51,7 @@ public class Intake extends Subsystem implements LogDataSource {
     		}
     	}
     	return ball_is_loaded;
-    }
+    }*/
     public void setBallIsLoaded ( boolean x )
     {
     	ball_is_loaded = x;
@@ -65,7 +65,7 @@ public class Intake extends Subsystem implements LogDataSource {
         m_intakeMotorTwo = new RampedSpeedController(ControllerType.Talon,RobotMap.MOTOR_INTAKE_TWO);
         m_intakeMotorTwo.setName("Intake Two");
 
-        m_intakeSwitch = new DigitalInput(RobotMap.SWITCH_INTAKE_LIMIT);
+        //m_intakeSwitch = new DigitalInput(RobotMap.SWITCH_INTAKE_LIMIT);
     }
     
     public void initialize()
@@ -91,7 +91,7 @@ public class Intake extends Subsystem implements LogDataSource {
     
     public void gatherValues( ValueLogger logger)
     {
-    	logger.logBooleanValue("Intake Switch", getIntakeSwitch());
+    	//logger.logBooleanValue("Intake Switch", getIntakeSwitch());
     	m_intakeMotor.gatherValues(logger);
     	m_intakeMotorTwo.gatherValues(logger);
     }

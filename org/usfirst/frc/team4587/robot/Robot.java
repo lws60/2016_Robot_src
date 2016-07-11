@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4587.robot.commands.AutonomousDriveAndShoot;
 import org.usfirst.frc.team4587.robot.commands.AutonomousDriveForTime;
 import org.usfirst.frc.team4587.robot.commands.AutonomousDriveUnderPortcullis;
+import org.usfirst.frc.team4587.robot.commands.AutonomousIRI;
 import org.usfirst.frc.team4587.robot.commands.AutonomousPosition2;
 import org.usfirst.frc.team4587.robot.commands.AutonomousPosition34;
 import org.usfirst.frc.team4587.robot.commands.AutonomousPosition5;
@@ -140,6 +141,15 @@ public class Robot extends IterativeRobot implements LogDataSource {
     private static DigitalInput m_defenseSwitchTwo;
     private static DigitalInput m_defenseSwitchThree;
     
+    private static DigitalInput m_backUpSwitchZero;
+    private static DigitalInput m_backUpSwitchOne;
+    private static DigitalInput m_backUpSwitchTwo;
+    //private static DigitalInput m_backUpSwitchThree;
+    private static DigitalInput m_twoBallSwitchZero;
+    private static DigitalInput m_twoBallSwitchOne;
+    private static DigitalInput m_twoBallSwitchTwo;
+    //private static DigitalInput m_twoBallSwitchThree;
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -181,6 +191,16 @@ public class Robot extends IterativeRobot implements LogDataSource {
 			m_positionSwitchOne = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_1));
 			m_positionSwitchTwo = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_2));
 			m_positionSwitchThree = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_3));
+			
+			m_backUpSwitchZero = new DigitalInput(RobotMap.BACK_UP_SWITCH_0);
+			m_backUpSwitchOne = new DigitalInput(RobotMap.BACK_UP_SWITCH_1);
+			m_backUpSwitchTwo = new DigitalInput(RobotMap.BACK_UP_SWITCH_2);
+			//m_backUpSwitchThree = new DigitalInput(RobotMap.BACK_UP_SWITCH_3);
+			
+			m_twoBallSwitchZero = new DigitalInput(RobotMap.TWO_BALL_SWITCH_0);
+			m_twoBallSwitchOne = new DigitalInput(RobotMap.TWO_BALL_SWITCH_1);
+			m_twoBallSwitchTwo = new DigitalInput(RobotMap.TWO_BALL_SWITCH_2);
+			//m_twoBallSwitchThree = new DigitalInput(RobotMap.TWO_BALL_SWITCH_3);
 			
 			SmartDashboard.putNumber("defense number: ", getFieldDefense());
 			SmartDashboard.putNumber("position number: ", getFieldPosition());
@@ -229,6 +249,20 @@ public class Robot extends IterativeRobot implements LogDataSource {
   			 + 8 * (m_defenseSwitchThree.get() ? 1:0));
     }
 
+    public static int getFieldBackUp()
+    {
+    	return 7 - (1 * (m_backUpSwitchZero.get() ? 1:0)
+    		 + 2 * (m_backUpSwitchOne.get() ? 1:0)
+    		 + 4 * (m_backUpSwitchTwo.get() ? 1:0));
+    }
+    
+    public static int getFieldTwoBall()
+    {
+    	return 7 - (1 * (m_twoBallSwitchZero.get() ? 1:0)
+    		 + 2 * (m_twoBallSwitchOne.get() ? 1:0)
+    		 + 4 * (m_twoBallSwitchTwo.get() ? 1:0));
+    }
+    
     public void disabledInit()
     {
     	initializeNewPhase(ValueLogger.DISABLED_PHASE);
@@ -277,7 +311,7 @@ public class Robot extends IterativeRobot implements LogDataSource {
     				break;
     			}
     		}*/
-    		autonomousCommand = new AutonomousWorlds();
+    		autonomousCommand = new AutonomousIRI();
     		System.out.println(autonomousCommand);
             //autonomousCommand.start();
             
@@ -300,6 +334,18 @@ public class Robot extends IterativeRobot implements LogDataSource {
     	SmartDashboard.putBoolean("Defense Switch 2", m_defenseSwitchTwo.get());
     	SmartDashboard.putBoolean("Defense Switch 3", m_defenseSwitchThree.get());
     	SmartDashboard.putNumber("Field Defense", getFieldDefense());
+    	
+    	SmartDashboard.putBoolean("Back Up Switch 0", m_backUpSwitchZero.get());
+    	SmartDashboard.putBoolean("Back Up Switch 1", m_backUpSwitchOne.get());
+    	SmartDashboard.putBoolean("Back Up Switch 2", m_backUpSwitchTwo.get());
+    	//SmartDashboard.putBoolean("Back Up Switch 3", m_backUpSwitchThree.get());
+    	SmartDashboard.putNumber("Field Back Up", getFieldBackUp());
+    	SmartDashboard.putBoolean("Two Ball Switch 0", m_twoBallSwitchZero.get());
+    	SmartDashboard.putBoolean("Two Ball Switch 1", m_twoBallSwitchOne.get());
+    	SmartDashboard.putBoolean("Two Ball Switch 2", m_twoBallSwitchTwo.get());
+    	//SmartDashboard.putBoolean("Two Ball Switch 3", m_twoBallSwitchThree.get());
+    	SmartDashboard.putNumber("Field Two Ball", getFieldTwoBall());
+    	
     	long start = System.nanoTime();
         Scheduler.getInstance().run();
         if ( logger != null ) logger.logValues(start);
@@ -323,13 +369,35 @@ public class Robot extends IterativeRobot implements LogDataSource {
     
     	Scheduler.getInstance().run();
     	if ( logger != null ) logger.logValues(start);
-    	if (m_iAmARealRobot){
+    	/*if (m_iAmARealRobot){
     		if (m_intake.getIntakeSwitch() == false)
     		{
     			Bling.sendData((byte) 35);
     			m_intake.setBallIsLoaded(true);
     		}
-    	}
+    	}*/
+    	
+    	SmartDashboard.putBoolean("Position Switch 0", m_positionSwitchZero.get());
+    	SmartDashboard.putBoolean("Position Switch 1", m_positionSwitchOne.get());
+    	SmartDashboard.putBoolean("Position Switch 2", m_positionSwitchTwo.get());
+    	SmartDashboard.putBoolean("Position Switch 3", m_positionSwitchThree.get());
+    	SmartDashboard.putNumber("Field Position", getFieldPosition());
+    	SmartDashboard.putBoolean("Defense Switch 0", m_defenseSwitchZero.get());
+    	SmartDashboard.putBoolean("Defense Switch 1", m_defenseSwitchOne.get());
+    	SmartDashboard.putBoolean("Defense Switch 2", m_defenseSwitchTwo.get());
+    	SmartDashboard.putBoolean("Defense Switch 3", m_defenseSwitchThree.get());
+    	SmartDashboard.putNumber("Field Defense", getFieldDefense());
+    	
+    	SmartDashboard.putBoolean("Back Up Switch 0", m_backUpSwitchZero.get());
+    	SmartDashboard.putBoolean("Back Up Switch 1", m_backUpSwitchOne.get());
+    	SmartDashboard.putBoolean("Back Up Switch 2", m_backUpSwitchTwo.get());
+    	//SmartDashboard.putBoolean("Back Up Switch 3", m_backUpSwitchThree.get());
+    	SmartDashboard.putNumber("Field Back Up", getFieldBackUp());
+    	SmartDashboard.putBoolean("Two Ball Switch 0", m_twoBallSwitchZero.get());
+    	SmartDashboard.putBoolean("Two Ball Switch 1", m_twoBallSwitchOne.get());
+    	SmartDashboard.putBoolean("Two Ball Switch 2", m_twoBallSwitchTwo.get());
+    	//SmartDashboard.putBoolean("Two Ball Switch 3", m_twoBallSwitchThree.get());
+    	SmartDashboard.putNumber("Field Two Ball", getFieldTwoBall());
     }
     
     public void testPeriodic() {
