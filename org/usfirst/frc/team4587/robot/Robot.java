@@ -205,6 +205,28 @@ public class Robot extends IterativeRobot implements LogDataSource {
 			SmartDashboard.putNumber("defense number: ", getFieldDefense());
 			SmartDashboard.putNumber("position number: ", getFieldPosition());
     	}
+    	/*m_defenseSwitchZero = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_0));
+		m_defenseSwitchOne = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_1));
+		m_defenseSwitchTwo = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_2));
+		m_defenseSwitchThree = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.DEFENSE_SWITCH_3));
+		
+		m_positionSwitchZero = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_0));
+		m_positionSwitchOne = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_1));
+		m_positionSwitchTwo = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_2));
+		m_positionSwitchThree = new DigitalInput(Gyro.getChannelFromPin(Gyro.PinType.DigitalIO, RobotMap.POSITION_SWITCH_3));
+		
+		m_backUpSwitchZero = new DigitalInput(RobotMap.BACK_UP_SWITCH_0);
+		m_backUpSwitchOne = new DigitalInput(RobotMap.BACK_UP_SWITCH_1);
+		m_backUpSwitchTwo = new DigitalInput(RobotMap.BACK_UP_SWITCH_2);
+		//m_backUpSwitchThree = new DigitalInput(RobotMap.BACK_UP_SWITCH_3);
+		
+		m_twoBallSwitchZero = new DigitalInput(RobotMap.TWO_BALL_SWITCH_0);
+		m_twoBallSwitchOne = new DigitalInput(RobotMap.TWO_BALL_SWITCH_1);
+		m_twoBallSwitchTwo = new DigitalInput(RobotMap.TWO_BALL_SWITCH_2);
+		//m_twoBallSwitchThree = new DigitalInput(RobotMap.TWO_BALL_SWITCH_3);*/
+		
+		SmartDashboard.putNumber("defense number: ", getFieldDefense());
+		SmartDashboard.putNumber("position number: ", getFieldPosition());
     	m_oi = new OI();
         // Always create OI last, since it creates Command objects that depend on
         // the subsystems already having been created.
@@ -277,7 +299,7 @@ public class Robot extends IterativeRobot implements LogDataSource {
     	initializeNewPhase(ValueLogger.AUTONOMOUS_PHASE);
     	Bling.sendData((byte)33);
     	
-    	if ( m_iAmARealRobot ) {
+    	if (m_iAmARealRobot ) {
     		//autonomousCommand = (Command) chooser.getSelected();
     		m_driveBase.getLeftController().setMaxLowerPerInterval(1.0);
     		m_driveBase.getRightController().setMaxLowerPerInterval(1.0);
