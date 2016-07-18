@@ -23,6 +23,12 @@ public class Aim2 extends Command {
 	private double m_degreesPerSecond;
 	private double m_percentDegreesToSlow;
 	
+	private static boolean m_finishedAiming;
+	public static boolean finishedAiming()
+	{
+		return m_finishedAiming;
+	}
+	
 	private int count;
 	
 	private Command m_wait;
@@ -36,6 +42,7 @@ public class Aim2 extends Command {
     	m_intervalTolerance = intervalTolerance;
     	m_tolerance = tolerance;
     	m_percentDegreesToSlow = percentDegreesToSlow;
+    	
     }
 
     // Called just before this Command runs the first time
@@ -46,7 +53,7 @@ public class Aim2 extends Command {
     	m_moving = false;
     	m_desiredYaw = Gyro.getYaw();
     	
-    	
+    	m_finishedAiming = false;
     	count = 0;
     }
 
@@ -110,6 +117,7 @@ public class Aim2 extends Command {
 	    			if (Gyro.getYaw() >= CameraThread.desiredLeftYaw() && Gyro.getYaw() <= CameraThread.desiredRightYaw())
 	    			{
 	    				m_onTarget = true;
+	    				m_finishedAiming = true;
 	    			}
 	    			else
 	    			{
@@ -125,6 +133,7 @@ public class Aim2 extends Command {
 	    			if (Math.abs(Gyro.getYaw() - m_desiredYaw) < m_tolerance)
 	    			{
 	    				m_onTarget = true;
+	    				m_finishedAiming = true;
 	    			}
 	    			else
 	    			{
