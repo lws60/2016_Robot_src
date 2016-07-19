@@ -27,16 +27,15 @@ public class LowbarOneBall extends CommandGroup {
     	addSequential(new ArmDown());
 		addSequential(new LowerIntake());
     	addSequential(new Wait(25));
-		addSequential(new AutonomousDriveStraightDistance(120, 0.6));
+		addSequential(new AutonomousDriveStraightDistance(100, 0.6));
 		addSequential(new ToggleIntakePiston());
-		addSequential(new AutonomousDriveStraightDistance(60, 0.6));
+		addSequential(new AutonomousDriveStraightDistance(80, 0.6));
 		addSequential(new AutonomousTurnToAngle2(35, 15, 0.5, 2.5));
-		addSequential(new AutonomousDriveStraightDistance(20, 0.6));
 		addSequential(new ArmDown());
-    	addSequential(new Wait(20));
 		addSequential(new LowerIntake());
+    	addSequential(new Wait(35));
 		addSequential(new Aim2(0.3, 13, 0.1, 1,0));
-		addSequential(new Wait(10));
+		addSequential(new Wait(35));
 		addSequential(new HighShot());
     }
 }
