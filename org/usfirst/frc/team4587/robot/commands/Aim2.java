@@ -129,7 +129,7 @@ public class Aim2 extends Command {
 	    		{
 	    			double pixels = m_cameraThread.shotAngleError();
 	    			//m_desiredYaw = CameraThread.yawWhenPicture() - pixels * 54 / 640;
-	    			m_desiredYaw = CameraThread.yawWhenPicture() - pixels * 0.075;
+	    			m_desiredYaw = CameraThread.yawWhenPicture() - pixels * 0.075; //try with 61 / 640
 	    			if (Math.abs(Gyro.getYaw() - m_desiredYaw) < m_tolerance)
 	    			{
 	    				m_onTarget = true;
