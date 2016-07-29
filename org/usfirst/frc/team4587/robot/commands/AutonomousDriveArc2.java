@@ -25,6 +25,8 @@ public class AutonomousDriveArc2 extends Command {
 	
 	double m_leftSpeed;
 	double m_rightSpeed;
+	double leftSpeed1;
+	double rightSpeed1;
 	double m_totalDistance;
 	
 	int m_count;
@@ -38,6 +40,9 @@ public class AutonomousDriveArc2 extends Command {
     	m_rightDesiredVelocity = rightDesiredVelocity;
     	m_leftSpeed = leftSpeed;
     	m_rightSpeed = rightSpeed;
+
+    	leftSpeed1 = leftSpeed;
+    	rightSpeed1 = rightSpeed;
     }
 
     // Called just before this Command runs the first time
@@ -47,7 +52,7 @@ public class AutonomousDriveArc2 extends Command {
     	m_lastLeft = Robot.getDriveBase().getEncoderLeft();
     	m_lastRight = Robot.getDriveBase().getEncoderRight();
     	m_count = 0;
-    	m_encoderToMotor = 0; //magic number
+    	m_encoderToMotor = 842; //magic number  encoder dots per 20ms at max speed
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -60,32 +65,49 @@ public class AutonomousDriveArc2 extends Command {
     	m_rightCurrentVelocity = m_currentRight - m_lastRight;	
     	m_leftDesiredVelocityChange = m_leftDesiredVelocity - m_leftCurrentVelocity;
        	m_rightDesiredVelocityChange = m_rightDesiredVelocity - m_rightCurrentVelocity;
-    	if (m_count != 0)
+    	/*if (m_count != 0)
     	{
     		if (m_leftCurrentVelocity < m_leftDesiredVelocity)
     		{
     			//increase m_leftSpeed
-    			m_leftSpeed += m_leftDesiredVelocityChange * m_encoderToMotor;
+    			m_leftSpeed += m_leftDesiredVelocityChange / m_encoderToMotor;
     		}
     		else if (m_leftCurrentVelocity > m_leftDesiredVelocity)
     		{
     			//decrease m_leftSpeed
-    			m_leftSpeed -= m_leftDesiredVelocityChange * m_encoderToMotor;
+    			m_leftSpeed -= m_leftDesiredVelocityChange / m_encoderToMotor;
     		}
     		
     		if (m_rightCurrentVelocity < m_rightDesiredVelocity)
     		{
     			//increase m_rightSpeed
-    			m_rightSpeed += m_rightDesiredVelocityChange * m_encoderToMotor;
+    			m_rightSpeed += m_rightDesiredVelocityChange / m_encoderToMotor;
     		}
     		else if (m_rightCurrentVelocity > m_rightDesiredVelocity)
     		{
     			//decrease m_rightSpeed
-    			m_rightSpeed -= m_rightDesiredVelocityChange * m_encoderToMotor;
+    			m_rightSpeed -= m_rightDesiredVelocityChange / m_encoderToMotor;
     		}
+    	}*/
+    	if (m_rightSpeed > 1.0)
+    	{
+    		m_rightSpeed = 1.0;
+    	}
+    	else if (m_rightSpeed < -1.0)
+    	{
+    		m_rightSpeed = -1.0;
+    	}
+
+    	if (m_leftSpeed > 1.0)
+    	{
+    		m_leftSpeed = 1.0;
+    	}
+    	else if (m_leftSpeed < -1.0)
+    	{
+    		m_leftSpeed = -1.0;
     	}
     	Robot.getDriveBase().getLeftController().setDesiredSetting(m_leftSpeed);
-		Robot.getDriveBase().getRightController().setDesiredSetting(m_rightSpeed);
+		Robot.getDriveBase().getRightController().setDesiredSetting(m_rightSpeed * -1);
     	Robot.getDriveBase().getLeftController().updateMotorLevel();
     	Robot.getDriveBase().getRightController().updateMotorLevel();
     	m_count += 1;
@@ -106,6 +128,25 @@ public class AutonomousDriveArc2 extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.getDriveBase().teleopDrive(0, 0);
+    	
+    	m_count = 0;
+    	
+    	m_startLeft = 0;
+    	m_startRight = 0;
+    	m_lastLeft = 0;
+    	m_lastRight = 0;
+    	m_currentLeft = 0;
+    	m_currentRight = 0;
+    	
+    	m_leftCurrentVelocity = 0;
+    	m_rightCurrentVelocity = 0;
+    	m_leftDesiredVelocity = 0;
+    	m_rightDesiredVelocity = 0;
+    	m_leftDesiredVelocityChange = 0;
+    	m_rightDesiredVelocityChange = 0;
+    	
+    	m_leftSpeed = leftSpeed1;
+    	m_rightSpeed = rightSpeed1;
     }
 
     // Called when another command which requires one or more of the same
