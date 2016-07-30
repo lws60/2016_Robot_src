@@ -243,7 +243,8 @@ public class CameraThread extends Thread{
             m_desiredLeftGoalAlignment = Parameters.getInt("Desired Left Edge of Goal", 275);
             m_leftGoalAlignmentTolerance = Parameters.getInt("Tolerance for Left Edge of Goal", 10);
             
-            m_desiredCenterLine = Parameters.getInt("Desired Center Line", 309);
+            m_desiredCenterLine = Parameters.getInt("Desired Center Line", 314);
+            //+ = left - = right
         }
 
         // Nothing to do in the constructor for a single thread.

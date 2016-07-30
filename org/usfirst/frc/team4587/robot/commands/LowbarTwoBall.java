@@ -65,8 +65,8 @@ public class LowbarTwoBall extends CommandGroup {
     	/*addSequential(new Wait(10));
 		addSequential(new AutonomousTurnToAngle2(0, 15, 0.6, 1));
     	addSequential(new Wait(20));*/
-		addSequential(new AutonomousDriveStraightAtAngle(-20, -0.6, 1, 0.1));
-		addSequential(new AutonomousDriveStraightDistance(-40, -0.6));
+		addSequential(new AutonomousDriveStraightAtAngle(-20, -0.5, 1, 0.1));
+		addSequential(new AutonomousDriveStraightDistance(-40, -0.4));
 		addParallel(new StartIntakeMotors(1.0));
 		//addSequential(new AutonomousDriveStraightDistance(-10, -0.6));
 		//addSequential(new AutonomousDriveStraightDistance(-110, -0.5));

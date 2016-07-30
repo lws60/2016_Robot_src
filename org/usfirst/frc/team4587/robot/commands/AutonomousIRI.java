@@ -21,10 +21,10 @@ public class AutonomousIRI extends CommandGroup {
     	// rough terrain addSequential(new AutonomousDriveStraightDistance(135, 0.6));
     	// rock wall addSequential(new AutonomousDriveStraightDistance(210, 0.9));
     	
-    	defense = RobotMap.LOW_BAR;//Robot.getFieldDefense();
-    	position = 999;//Robot.getFieldPosition();
+    	defense = RobotMap.CHEVAL;//Robot.getFieldDefense();
+    	position = 5;//Robot.getFieldPosition();
     	backUp = 999;//Robot.getFieldBackUp();
-    	twoBall = 2;//Robot.getFieldTwoBall();
+    	twoBall = 999;//Robot.getFieldTwoBall();
     	//defense = RobotMap.CHEVAL;
     	//position = 3;
     	defenseName = "secret passage";
@@ -39,10 +39,10 @@ public class AutonomousIRI extends CommandGroup {
     	{
     	case RobotMap.CHEVAL:
 	    		//cheval
-	        addSequential(new AutonomousDriveStraightDistance(27, 0.5));
 			addSequential(new ArmDown());
-			addSequential(new Wait(75));
-			addSequential(new AutonomousDriveStraightDistance(95, 0.7));
+			addSequential(new Wait(25));
+	        addSequential(new AutonomousDriveStraightDistance(27, 0.4));
+			addSequential(new AutonomousDriveStraightDistance(95, 0.5));
 			addSequential(new Wait(25));
     		defenseName = "cheval";
 			break;
@@ -154,11 +154,11 @@ public class AutonomousIRI extends CommandGroup {
 	    	addSequential(new ToggleIntakePiston());
 	    	addSequential(new Wait(25));
 	    	addSequential(new HighShot());*/
-			addSequential(new AutonomousTurnToAngle(-90, 0.8, 2.5));
+			addSequential(new AutonomousTurnToAngle(-70, 0.65, 2.5));
 	    	addSequential(new Wait(25));
 	    	addSequential(new AutonomousDriveStraightDistance(45, 0.7));
 	    	addSequential(new Wait(25));
-	    	addSequential(new AutonomousTurnToAngle(0, 0.8, 2.5));
+	    	addSequential(new AutonomousTurnToAngle(0, 0.6, 2.5));
 	    	addSequential(new ArmDown());
 	    	addSequential(new Wait(50));
 	    	addSequential(new Aim(0.7, 1));
@@ -205,9 +205,9 @@ public class AutonomousIRI extends CommandGroup {
 		{
 		case RobotMap.CHEVAL:
     		//cheval
-			addSequential(new AutonomousDriveStraightDistance(27, 0.5));
 			addSequential(new ArmDown());
-			addSequential(new Wait(75));
+			addSequential(new Wait(25));
+			addSequential(new AutonomousDriveStraightDistance(27, 0.5));
 			addSequential(new AutonomousDriveStraightDistance(95, 0.7));
 			addSequential(new Wait(25));
 			defenseName = "cheval";

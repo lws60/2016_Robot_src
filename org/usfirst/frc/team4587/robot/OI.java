@@ -14,6 +14,7 @@ import org.usfirst.frc.team4587.robot.commands.AutomaticAim;
 import org.usfirst.frc.team4587.robot.commands.AutonomousDriveArc;
 import org.usfirst.frc.team4587.robot.commands.AutonomousDriveArc2;
 import org.usfirst.frc.team4587.robot.commands.AutonomousDriveStraightAtAngle;
+import org.usfirst.frc.team4587.robot.commands.AutonomousDriveStraightDistance;
 import org.usfirst.frc.team4587.robot.commands.AutonomousTurnToAngle;
 import org.usfirst.frc.team4587.robot.commands.AutonomousTurnToAngle2;
 import org.usfirst.frc.team4587.robot.commands.DriveWithJoysticks;
@@ -71,11 +72,11 @@ public class OI implements LogDataSource {
 
     	if ( Robot.iAmARealRobot()) {
     		buttonB1.whenPressed(new DriveWithJoysticks());
-    		//buttonA1.whenPressed(new RunCameraThread());
+    		buttonA1.whenPressed(new RunCameraThread());
     		//buttonX1.whenPressed(new Aim2(0.3, 10, 0.1, 1, 0.9));
-    		buttonA1.whenPressed(new TeleopAimBot());
-    		buttonX1.whenPressed(new AutonomousDriveArc2(-50, -500, -1, -0.4, -0.8));
-    		buttonY1.whenPressed(new AutonomousDriveArc2(50, 500, 1, 0.4, 0.8));
+    		buttonX1.whenPressed(new TeleopAimBot());
+    		//buttonX1.whenPressed(new AutonomousDriveArc2(-50, -500, -1, -0.4, -0.8));
+    		//buttonY1.whenPressed(new AutonomousDriveArc2(50, 500, 1, 0.4, 0.8));
     		//buttonY1.whenPressed(new AutonomousDriveStraightAtAngle(400, 0.7, 0, 0.1));
 	    	leftBumper1.whenPressed(new ToggleArmPiston());
 	    	rightBumper1.whenPressed(new LowShot());
