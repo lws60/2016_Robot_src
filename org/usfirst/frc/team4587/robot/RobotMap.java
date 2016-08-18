@@ -73,5 +73,6 @@ public class RobotMap {
     
     /*          Relays              */
     public static final int             FLASHLIGHT_CHANNEL = 0;
+    public static final int             FLASHLIGHT2_CHANNEL = 1;
     public static final Relay.Direction FLASHLIGHT_DIRECTION = Relay.Direction.kForward;
 }

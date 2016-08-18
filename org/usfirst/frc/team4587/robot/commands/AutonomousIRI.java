@@ -21,10 +21,10 @@ public class AutonomousIRI extends CommandGroup {
     	// rough terrain addSequential(new AutonomousDriveStraightDistance(135, 0.6));
     	// rock wall addSequential(new AutonomousDriveStraightDistance(210, 0.9));
     	
-    	defense = RobotMap.CHEVAL;//Robot.getFieldDefense();
-    	position = 5;//Robot.getFieldPosition();
+    	defense = RobotMap.LOW_BAR;//Robot.getFieldDefense();
+    	position = 999;//Robot.getFieldPosition();
     	backUp = 999;//Robot.getFieldBackUp();
-    	twoBall = 999;//Robot.getFieldTwoBall();
+    	twoBall = 2;//Robot.getFieldTwoBall();
     	//defense = RobotMap.CHEVAL;
     	//position = 3;
     	defenseName = "secret passage";

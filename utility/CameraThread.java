@@ -206,16 +206,16 @@ public class CameraThread extends Thread{
             
             //Neo Pixel
             m_hueRange        = new NIVision.Range (
-                    Parameters.getInt("HSV Filter Min. Hue",100)
-                  , Parameters.getInt("HSV Filter Max. Hue",130)
+                    Parameters.getInt("HSV Filter Min. Hue",90)//100
+                  , Parameters.getInt("HSV Filter Max. Hue",140)//130
                 );
             m_saturationRange = new NIVision.Range (
-                    Parameters.getInt("HSV Filter Min. Saturation",220)
+                    Parameters.getInt("HSV Filter Min. Saturation",210)//220
                   , Parameters.getInt("HSV Filter Max. Saturation",255)
                 );
             m_valueRange      = new NIVision.Range (
-                    Parameters.getInt("HSV Filter Min. Value",100)
-                  , Parameters.getInt("HSV Filter Max. Value",200)
+                    Parameters.getInt("HSV Filter Min. Value",90)//100
+                  , Parameters.getInt("HSV Filter Max. Value",210)//200
                 );
             
             m_redRange        = new NIVision.Range (
@@ -243,7 +243,7 @@ public class CameraThread extends Thread{
             m_desiredLeftGoalAlignment = Parameters.getInt("Desired Left Edge of Goal", 275);
             m_leftGoalAlignmentTolerance = Parameters.getInt("Tolerance for Left Edge of Goal", 10);
             
-            m_desiredCenterLine = Parameters.getInt("Desired Center Line", 314);
+            m_desiredCenterLine = Parameters.getInt("Desired Center Line", 315);
             //+ = left - = right
         }
 

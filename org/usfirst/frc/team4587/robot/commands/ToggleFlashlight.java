@@ -11,11 +11,13 @@ public class ToggleFlashlight extends Command {
 
     public ToggleFlashlight() {
     	requires(Robot.getFlashlight());
+    	requires(Robot.getFlashlight2());
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.getFlashlight().setFlashlightState(! Robot.getFlashlight().getFlashlightState());
+    	Robot.getFlashlight2().setFlashlightState(! Robot.getFlashlight2().getFlashlightState());
     }
 
     // Called repeatedly when this Command is scheduled to run

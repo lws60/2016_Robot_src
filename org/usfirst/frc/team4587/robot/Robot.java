@@ -29,6 +29,7 @@ import org.usfirst.frc.team4587.robot.subsystems.ArmPiston;
 import org.usfirst.frc.team4587.robot.subsystems.Catapult;
 import org.usfirst.frc.team4587.robot.subsystems.DriveBase;
 import org.usfirst.frc.team4587.robot.subsystems.Flashlight;
+import org.usfirst.frc.team4587.robot.subsystems.Flashlight2;
 import org.usfirst.frc.team4587.robot.subsystems.GrappleHook;
 import org.usfirst.frc.team4587.robot.subsystems.Intake;
 import org.usfirst.frc.team4587.robot.subsystems.IntakePiston;
@@ -115,6 +116,12 @@ public class Robot extends IterativeRobot implements LogDataSource {
 	public static Flashlight getFlashlight()
 	{
 		return m_flashlight;
+	}
+	
+	private static Flashlight2 m_flashlight2;
+	public static Flashlight2 getFlashlight2()
+	{
+		return m_flashlight2;
 	}
 
 	private static CameraThread m_cameraThread;
